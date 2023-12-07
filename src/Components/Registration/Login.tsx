@@ -1,9 +1,13 @@
 import styles from './register.module.css'
 import image from './assets/image.png'
-
+import { useNavigate } from "react-router-dom";
 type Props = {}
 
 export const Login = (props: Props) => {
+   const navigate = useNavigate();
+   const navigateToDashboard = () => {
+     navigate("/dashboard");
+   };
   return (
     <div className={styles.RegistrationWrapper}>
       <div className={styles.headers}>
@@ -17,9 +21,11 @@ export const Login = (props: Props) => {
           <input type="text" placeholder="Password" />
           <a href="">Forgot Password?</a>
         </div>
-        <button>Sign In</button>
+        <button onClick={navigateToDashboard}>Sign In</button>
       </div>
-      <p>Not a member? <a href="/signup">Register Now!</a></p>
+      <p>
+        Not a member? <a href="/signup">Register Now!</a>
+      </p>
     </div>
   );
 }

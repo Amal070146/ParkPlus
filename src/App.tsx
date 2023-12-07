@@ -17,6 +17,7 @@ import { Support } from './Components/Support/Support';
 import { ContactUs } from './Components/ContactUs/ContactUs';
 import { DeleteSuccess } from './Components/Successpage/DeleteSuccess';
 import { QRScanner } from './Components/QRScanner/QRScanner';
+import { Notifications } from './Components/Notifications/Notifications';
 function App() {
  
   const router = createBrowserRouter([
@@ -79,6 +80,10 @@ function App() {
     {
       path: "/qrscanner",
       element: <QRScanner />,
+    },
+    {
+      path: "/notification",
+      element: <Notifications />,
     },
   ]);
     return <RouterProvider router={router} />;

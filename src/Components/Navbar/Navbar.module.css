@@ -1,0 +1,25 @@
+/* Header nav css */
+
+.HeaderNavWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0px 20px;
+  h2 {
+    color: #1e3d6b;
+    font-size: 25px;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  button {
+    background-color: transparent;
+    width: fit-content;
+    padding: 0;
+  }
+}
+
+
+/* Navbar CSS */

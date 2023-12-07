@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import { Navbar } from "../Navbar/Navbar";
+import { HeaderNav } from "../Navbar/HeaderNav";
 
-type Props = {}
+type Props = {};
 
 export const Dashboard = (props: Props) => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <div>
+      <HeaderNav title="Dashboard"/>
+      <Navbar />
+    </div>
+  );
+};
