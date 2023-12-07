@@ -16,11 +16,12 @@ import { Report } from './Components/Report/Report';
 import { Support } from './Components/Support/Support';
 import { ContactUs } from './Components/ContactUs/ContactUs';
 import { DeleteSuccess } from './Components/Successpage/DeleteSuccess';
+import { QRScanner } from './Components/QRScanner/QRScanner';
 function App() {
  
   const router = createBrowserRouter([
     {
-      path: "/login",
+      path: "/",
       element: <Login />,
     },
     {
@@ -28,7 +29,7 @@ function App() {
       element: <Signup />,
     },
     {
-      path: "/",
+      path: "/dashboard",
       element: <Dashboard />,
     },
     {
@@ -74,6 +75,10 @@ function App() {
     {
       path: "/delete",
       element: <DeleteSuccess />,
+    },
+    {
+      path: "/qrscanner",
+      element: <QRScanner />,
     },
   ]);
     return <RouterProvider router={router} />;
