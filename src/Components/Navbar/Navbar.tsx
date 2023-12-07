@@ -1,16 +1,23 @@
-import React from 'react'
-import styles from './Navbar.module.css'
-import { Bookingssvg, Dashboardsvg, QRsvg, Walletsvg } from './svg'
+import styles from "./Navbar.module.css";
+import { Bookingssvg, Dashboardsvg, QRsvg, Walletsvg } from "./svg";
 
-type Props = {}
 
-export const Navbar = (props: Props) => {
+
+export const Navbar = () => {
   return (
     <div className={styles.NavbarWrapper}>
-      <Dashboardsvg />
-      <Bookingssvg />
-      <Walletsvg />
-      <QRsvg />
+      <a href="/dashboard">
+        <Dashboardsvg />
+      </a>
+      <a href="/bookings">
+        <Bookingssvg />
+      </a>
+      <a href="/wallet">
+        <Walletsvg />
+      </a>
+      <a href="/qrscanner">
+        <QRsvg />
+      </a>
     </div>
-  )
-}
+  );
+};

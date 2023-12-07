@@ -21,5 +21,16 @@
   }
 }
 
-
 /* Navbar CSS */
+.NavbarWrapper {
+  background-color: #1e3d6b;
+  width: calc(100% - 60px);
+  max-width: 900px;
+  position: fixed;
+  bottom: 20px;
+  padding: 15px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

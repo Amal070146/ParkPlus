@@ -1,1 +1,81 @@
 /* Dashboard css */
+
+.DashboardWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  gap: 15px;
+  height: 100vh;
+  justify-content: space-between;
+  overflow-y: scroll;
+  padding-bottom: 100px;
+}
+.dasboardSliderWrapper {
+  color: black;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  .RightArrow {
+    transform: rotate(180deg);
+  }
+}
+
+.CardsWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 350px;
+  overflow-x: hidden;
+  background-color: #1e3d6b;
+  border-radius: 25px;
+  .IndividualCards {
+    min-width: 100%;
+    height: 220px;
+    background-color: #1e3d6b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    .content {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      color: black;
+      font-size: 14px;
+      width: 90%;
+      justify-content: space-between;
+      padding: 5px 10px;
+      border-radius: 10px;
+      .RateWrap {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+/* Style the individual swiper slides */
+.MApWrapper {
+  width: 100%;
+  height: 300px;
+  background-color: #1e3d6b;
+  border-radius: 20px;
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.DashboardWrapper > a {
+  background-color: #1e3d6b;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+}
