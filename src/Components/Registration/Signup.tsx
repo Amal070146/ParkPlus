@@ -67,7 +67,7 @@ export const Signup = () => {
 	const handleRegistration = async (formData: FormData) => {
         toast.promise(registerUser(formData), {
             loading: "Registering...",
-            success: (response) => {
+            success: (response: any) => {
                 console.log("User registered successfully:", response);
                 navigate("/login");
                 return <b>User registered successfully!</b>;

@@ -1,9 +1,14 @@
-import React from 'react'
+import { HeaderNav } from "../Navbar/HeaderNav";
+import { Navbar } from "../Navbar/Navbar";
+import styles from './Support.module.css'
+type Props = {};
 
-type Props = {}
-
-export const Support = (props: Props) => {
+export const Support = (_props: Props) => {
   return (
-    <div>Support</div>
-  )
-}
+    <div className={styles.SupportWrapper}>
+      {" "}
+      <HeaderNav title="Support" />
+      <Navbar />
+    </div>
+  );
+};

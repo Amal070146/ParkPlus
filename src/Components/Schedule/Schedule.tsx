@@ -64,6 +64,7 @@ export const Schedule = (_props: Props) => {
   const [timeError, setTimeError] = useState<string>("");
 
   const roundToNearest30Min = (time: Date) => {
+    console.log(timeError)
     const minutes = time.getMinutes();
     const isUpperHalf = minutes >= 30;
     const nearestHalfHour = isUpperHalf ? 30 : 0;

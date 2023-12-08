@@ -1,12 +1,10 @@
 import styles from "./Navbar.module.css";
 import { Bookingssvg, Dashboardsvg, QRsvg, Walletsvg } from "./svg";
 
-
-
 export const Navbar = () => {
   return (
     <div className={styles.NavbarWrapper}>
-      <a href="/dashboard">
+      <a href="/">
         <Dashboardsvg />
       </a>
       <a href="/bookings">
