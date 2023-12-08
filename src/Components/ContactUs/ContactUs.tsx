@@ -1,8 +1,10 @@
+import { Calendar } from "@react-spectrum/calendar"
 
-type Props = {}
 
-export const ContactUs = (_props: Props) => {
+export const ContactUs = () => {
   return (
-    <div>ContactUs</div>
+    <div>
+		<Calendar  />
+	</div>
   )
 }

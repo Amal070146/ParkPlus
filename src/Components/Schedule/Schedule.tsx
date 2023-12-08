@@ -4,15 +4,12 @@ import styles from "./Schedule.module.css";
 import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
-import {
-    CalendarComponent,
-    ChangedEventArgs,
-} from "@syncfusion/ej2-react-calendars";
 
 import "./calender.css";
 import { RightArrowsvg, Searchsvg } from "./svg";
 import { CalendarDate } from "@internationalized/date";
-import { Calendar } from "../../utils/Calendar/Calender";
+import { Calendar } from "@react-spectrum/calendar";
+import Modal from "../../utils/Modal/Modal";
 type Props = {};
 
 export const Schedule = (_props: Props) => {
@@ -43,23 +40,6 @@ export const Schedule = (_props: Props) => {
             owner: "Amal C P",
         },
     ];
-
-    const [currentDate, setCurrentDate] = useState(new Date());
-
-    const goToNextMonth = () => {
-        setCurrentDate(
-            new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
-        );
-    };
-
-    const goToPreviousMonth = () => {
-        setCurrentDate(
-            new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
-        );
-    };
-    const onDateChange = (args: ChangedEventArgs): void => {
-        setCurrentDate(args.value || new Date());
-    };
 
     const [startTime, setStartTime] = useState<string>("");
     const [endTime, setEndTime] = useState<string>("");
@@ -138,6 +118,43 @@ export const Schedule = (_props: Props) => {
         new CalendarDate(2023, 1, 1)
     );
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const [removeModalOpen, setRemoveModalOpen] = useState(false);
+    const openModal = () => setModalOpen(true);
+    const closeModal = () => setModalOpen(false);
+    const [newVehicle, setNewVehicle] = useState<VehicleDetails>({
+        name: "",
+        regno: "",
+        owner: "",
+    });
+
+    const loadVehicles = (): VehicleDetails[] => {
+        const storedVehicles = localStorage.getItem("vehicles");
+        return storedVehicles ? JSON.parse(storedVehicles) : [];
+    };
+    const saveVehicles = (vehicles: VehicleDetails[]) => {
+        localStorage.setItem("vehicles", JSON.stringify(vehicles));
+    };
+    const [vehicles, setVehicles] = useState<VehicleDetails[]>(loadVehicles);
+
+    const handleAddVehicle = (newVehicle: VehicleDetails) => {
+        if (vehicles.length >= 5) {
+            alert("Cannot add more than 5 vehicles");
+            return;
+        }
+
+        const newVehicles = [...vehicles, newVehicle];
+        setVehicles(newVehicles);
+        saveVehicles(newVehicles);
+        closeModal();
+    };
+
+    const handleRemoveVehicle = (index: number) => {
+        const newVehicles = vehicles.filter((_, i) => i !== index);
+        setVehicles(newVehicles);
+        saveVehicles(newVehicles);
+    };
+
     return (
         <div className={styles.ScheduleWrapper}>
             {" "}
@@ -146,17 +163,89 @@ export const Schedule = (_props: Props) => {
                 <div className={styles.selectVehicle}>
                     <h2>1.Select Vehicle</h2>
                     <div className={styles.AddVechileCardWrap}>
-                        {data.map(({ vechilename, regno, owner }, i) => (
-                            <button key={i}>
-                                <p>{vechilename}</p>
-                                <p>{regno}</p>
-                                <p>{owner}</p>
-                            </button>
+                        {vehicles.map((vehicle, index) => (
+                            <>
+                                <div
+                                    key={index}
+                                    onClick={() => setRemoveModalOpen(true)}
+                                >
+                                    <p>{vehicle.name}</p>
+                                    <p>{vehicle.regno}</p>
+                                    <p>{vehicle.owner}</p>
+                                </div>
+                                <Modal
+                                    show={removeModalOpen}
+                                    onClose={() => setRemoveModalOpen(false)}
+                                >
+                                    <div className={styles.removeModalForm}>
+                                        <h3>
+                                            Are you sure you want to remove this
+                                            vehicle?
+                                        </h3>
+                                        <button
+                                            onClick={() => {
+                                                setRemoveModalOpen(false);
+                                                handleRemoveVehicle(index);
+                                            }}
+                                        >
+                                            Confirm
+                                        </button>
+                                    </div>
+                                </Modal>
+                            </>
                         ))}
-                        <button className={styles.addbutton}>
+                        <button
+                            className={styles.addbutton}
+                            onClick={openModal}
+                        >
                             <p>+</p>
                             <h4>Add Vehicle</h4>
                         </button>
+                        <Modal show={modalOpen} onClose={closeModal}>
+                            <div className={styles.modalForm}>
+                                <h2>Add Vehicle</h2>
+                                <div>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Vehicle Name"
+                                        value={newVehicle.name}
+                                        onChange={(e) =>
+                                            setNewVehicle({
+                                                ...newVehicle,
+                                                name: e.target.value,
+                                            })
+                                        }
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Registration Number"
+                                        value={newVehicle.regno}
+                                        onChange={(e) =>
+                                            setNewVehicle({
+                                                ...newVehicle,
+                                                regno: e.target.value,
+                                            })
+                                        }
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Owner Name"
+                                        value={newVehicle.owner}
+                                        onChange={(e) =>
+                                            setNewVehicle({
+                                                ...newVehicle,
+                                                owner: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </div>
+                                <button
+                                    onClick={() => handleAddVehicle(newVehicle)}
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </Modal>
                     </div>
                 </div>
                 <div className={styles.calendarWrapper}>
