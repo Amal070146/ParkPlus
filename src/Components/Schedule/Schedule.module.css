@@ -159,3 +159,38 @@
 	justify-content: center;
 	flex-direction: column;
 }
+
+.modalForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	padding: 20px 0px;
+}
+
+.modalForm div {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.modalForm div input {
+	padding: 10px;
+	background-color: lightgray;
+	border: none;
+	border-radius: 10px;
+	width: 90%;
+}
+
+.modalForm button, .removeModalForm button {
+	padding: 10px;
+	background-color: #1e3d6b;
+	color: white !important;
+	border: none;
+	border-radius: 10px;
+	width: 50%;
+}
