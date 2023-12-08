@@ -17,73 +17,78 @@ import { DeleteSuccess } from "./Components/Successpage/DeleteSuccess";
 import { QRScanner } from "./Components/QRScanner/QRScanner";
 import { Notifications } from "./Components/Notifications/Notifications";
 import PrivateRoutes from "./services/PrivateRoutes";
+import { SearchLocations } from "./Components/Schedule/SearchLocations";
 function App() {
-    const router = createBrowserRouter([
-        {
-            path: "/login",
-            element: <Login />,
-        },
-        {
-            path: "/signup",
-            element: <Signup />,
-        },
-        {
-            path: "/",
-            element: <Dashboard />,
-        },
-        {
-            path: "/schedule",
-            element: <PrivateRoutes children={<Schedule />} />,
-        },
-        {
-            path: "/wallet",
-            element: <Wallet />,
-        },
-        {
-            path: "/successpage",
-            element: <Successpage />,
-        },
-        {
-            path: "/ticket",
-            element: <Ticket />,
-        },
-        {
-            path: "/bookings",
-            element: <Bookings />,
-        },
-        {
-            path: "/profile",
-            element: <Profile />,
-        },
-        {
-            path: "/editprofile",
-            element: <EditProfile />,
-        },
-        {
-            path: "/report",
-            element: <Report />,
-        },
-        {
-            path: "/support",
-            element: <Support />,
-        },
-        {
-            path: "/contactus",
-            element: <ContactUs />,
-        },
-        {
-            path: "/delete",
-            element: <DeleteSuccess />,
-        },
-        {
-            path: "/qrscanner",
-            element: <QRScanner />,
-        },
-        {
-            path: "/notification",
-            element: <Notifications />,
-        },
-    ]);
-    return <RouterProvider router={router} />;
+  const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
+      path: "/",
+      element: <Dashboard />,
+    },
+    {
+      path: "/schedule",
+      element: <Schedule />,
+    },
+    {
+      path: "/wallet",
+      element: <Wallet />,
+    },
+    {
+      path: "/successpage",
+      element: <Successpage />,
+    },
+    {
+      path: "/ticket",
+      element: <Ticket />,
+    },
+    {
+      path: "/bookings",
+      element: <Bookings />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
+    },
+    {
+      path: "/editprofile",
+      element: <EditProfile />,
+    },
+    {
+      path: "/report",
+      element: <Report />,
+    },
+    {
+      path: "/support",
+      element: <Support />,
+    },
+    {
+      path: "/contactus",
+      element: <ContactUs />,
+    },
+    {
+      path: "/delete",
+      element: <DeleteSuccess />,
+    },
+    {
+      path: "/qrscanner",
+      element: <QRScanner />,
+    },
+    {
+      path: "/notification",
+      element: <Notifications />,
+    },
+    {
+      path: "/searchloaction",
+      element: <SearchLocations />,
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 export default App;

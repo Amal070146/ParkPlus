@@ -57,4 +57,96 @@
   justify-content: center;
 }
 
+.formWrapper .inputofTime {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+.formWrapper .inputofTime input {
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  color: black;
+}
 
+.locationContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  border: 1px solid #1e3d6b;
+  border-radius: 15px;
+}
+.locationContainer input {
+  background-color: transparent;
+  border: none;
+  color: #1e3d6b;
+}
+ .locationContainer button {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.SearchLocationWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  gap: 15px;
+  height: 100vh;
+  overflow-y: scroll;
+  padding-bottom: 100px;
+  color: black;
+}
+
+.SearchLocationWrapper .dataSetWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
+}
+
+.SearchLocationWrapper .dataSetWrapper .DataSet {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 10px);
+  background: #fcfafc;
+
+  box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.25);
+  color: black;
+  align-items: center;
+  gap: 3px;
+}
+
+.SearchLocationWrapper .dataSetWrapper .DataSet img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+
+.AddonContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.AddonContainer .addOnContainer{
+    display: flex;
+    gap: 10px;
+}
+
+.formWrapper>button{
+    align-self: center;
+    background-color: #1e3d6b;
+    width: 60%;
+    min-width: 100px;
+
+}
