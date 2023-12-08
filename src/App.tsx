@@ -30,59 +30,59 @@ function App() {
         },
         {
             path: "/",
-            element: <Dashboard />,
+            element: <PrivateRoutes children={<Dashboard />} />,
         },
         {
             path: "/schedule",
-            element: <Schedule />,
+            element: <PrivateRoutes children={<Schedule />} />,
         },
         {
             path: "/wallet",
-            element: <Wallet />,
+            element: <PrivateRoutes children={<Wallet />} />,
         },
         {
             path: "/successpage",
-            element: <Successpage />,
+            element: <PrivateRoutes children={<Successpage />} />,
         },
         {
             path: "/ticket",
-            element: <Ticket />,
+            element: <PrivateRoutes children={<Ticket />} />,
         },
         {
             path: "/bookings",
-            element: <Bookings />,
+            element: <PrivateRoutes children={<Bookings />} />,
         },
         {
             path: "/profile",
-            element: <Profile />,
+            element: <PrivateRoutes children={<Profile />} />,
         },
         {
             path: "/editprofile",
-            element: <EditProfile />,
+            element: <PrivateRoutes children={<EditProfile />} />,
         },
         {
             path: "/report",
-            element: <Report />,
+            element: <PrivateRoutes children={<Report />} />,
         },
         {
             path: "/support",
-            element: <Support />,
+            element: <PrivateRoutes children={<Support />} />,
         },
         {
             path: "/contactus",
-            element: <ContactUs />,
+            element: <PrivateRoutes children={<ContactUs />} />,
         },
         {
             path: "/delete",
-            element: <DeleteSuccess />,
+            element: <PrivateRoutes children={<DeleteSuccess />} />,
         },
         {
             path: "/qrscanner",
-            element: <QRScanner />,
+            element: <PrivateRoutes children={<QRScanner />} />,
         },
         {
             path: "/notification",
-            element: <Notifications />,
+            element: <PrivateRoutes children={<Notifications />} />,
         },
     ]);
     return (
