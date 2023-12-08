@@ -13,7 +13,6 @@ export const privateGateway = axios.create({
 
 privateGateway.interceptors.request.use(
     function (config) {
-        // Check if the endpoint is not "/register"
         if (
             config.url !== "login/" &&
             config.url !== "login-muid/" &&
