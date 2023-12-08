@@ -45,6 +45,14 @@
   background-color: white;
   border-radius: 10px;
   width: 100%;
+  color: black;
+}
+
+.InputContainerWrapper > div P {
+  color: red;
+  text-align: left;
+  margin-top: -5px;
+  margin-left: 10px;
 }
 .InputContainerWrapper > div a {
   align-self: flex-end;

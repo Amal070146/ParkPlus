@@ -1,4 +1,5 @@
 export const Routes = {
-    login: "login-muid/",
+    login: "user/login/",
+	register: "user/register/",
     profile: "profile/",
 };

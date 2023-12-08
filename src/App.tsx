@@ -17,6 +17,7 @@ import { DeleteSuccess } from "./Components/Successpage/DeleteSuccess";
 import { QRScanner } from "./Components/QRScanner/QRScanner";
 import { Notifications } from "./Components/Notifications/Notifications";
 import PrivateRoutes from "./services/PrivateRoutes";
+import { Toaster } from "react-hot-toast";
 function App() {
     const router = createBrowserRouter([
         {
@@ -33,7 +34,7 @@ function App() {
         },
         {
             path: "/schedule",
-            element: <PrivateRoutes children={<Schedule />} />,
+            element: <Schedule />,
         },
         {
             path: "/wallet",
@@ -84,6 +85,11 @@ function App() {
             element: <Notifications />,
         },
     ]);
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <RouterProvider router={router} />
+            <Toaster position="bottom-center" reverseOrder={true} />
+        </>
+    );
 }
 export default App;
