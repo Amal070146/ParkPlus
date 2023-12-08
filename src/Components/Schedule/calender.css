@@ -1,0 +1,51 @@
+/* calender css */
+
+.control-pane{
+    width: 100%;
+}
+
+.control-section{
+    width: 100%;
+}
+
+.calendar-control-section {
+  max-width: 100%;
+  width: 100%;
+  background-color: transparent;
+  margin: 0 auto;
+}
+.e-calendar .e-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 20px;
+    align-items: center;
+}
+/* Custom arrow styles */
+.e-calendar .e-header .e-prev,
+.e-calendar .e-header .e-next {
+ background-color: black; /* Background color for arrows */
+  color: grey;
+  display: none;
+}
+.e-calendar .e-header .e-prev:before,
+.e-calendar .e-header .e-next:before {
+  color: grey;
+}
+.e-calendar{
+    width: 100%;
+}
+.e-calendar .e-content{
+    width: 100%;
+}
+.e-calendar .e-content table{
+    width: 100%;
+}
+/* Custom styles for selected date */
+.e-calendar .e-content .e-cell.e-selected,
+.e-calendar .e-content .e-cell.e-selected:hover {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: fit-content;
+}

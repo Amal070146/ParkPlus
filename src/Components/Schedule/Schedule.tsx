@@ -2,6 +2,13 @@ import { HeaderNav } from "../Navbar/HeaderNav";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Schedule.module.css";
 
+import { useState } from "react";
+import {
+  CalendarComponent,
+  ChangedEventArgs,
+} from "@syncfusion/ej2-react-calendars";
+
+import "./calender.css";
 type Props = {};
 
 export const Schedule = (_props: Props) => {
@@ -32,6 +39,23 @@ export const Schedule = (_props: Props) => {
       owner: "Amal C P",
     },
   ];
+
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const goToNextMonth = () => {
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+    );
+  };
+
+  const goToPreviousMonth = () => {
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+    );
+  };
+  const onDateChange = (args: ChangedEventArgs): void => {
+    setCurrentDate(args.value || new Date());
+  };
   return (
     <div className={styles.ScheduleWrapper}>
       {" "}
@@ -47,14 +71,47 @@ export const Schedule = (_props: Props) => {
                 <p>{owner}</p>
               </button>
             ))}
-            <button>
+            <button className={styles.addbutton}>
               <p>+</p>
-              <p>Add Vehicle</p>
+              <h4>Add Vehicle</h4>
             </button>
           </div>
         </div>
-        <div></div>
-        <div></div>
+        <div>
+          <h2>2.Select Date</h2>
+          <div className="control-pane">
+            <div className="control-section">
+              <div
+                className="calendar-control-section"
+                style={{
+                  overflow: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "5px",
+                }}
+              >
+                <CalendarComponent
+                  value={currentDate}
+                  change={onDateChange}
+                ></CalendarComponent>
+                <div>
+                  <button onClick={goToPreviousMonth}>Previous</button>{" "}
+                  <button onClick={goToNextMonth}>Next</button>
+                </div>
+                <label id="date_label">
+                  Selected Value: {currentDate.toLocaleDateString()}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2>3.Select Time</h2>
+          <div>
+            <input className={styles.StartTime} type="text" name="" id="" />
+            <input className={styles.EndTime} type="text" name="" id="" />
+          </div>
+        </div>
         <div></div>
         <div></div>
       </div>
