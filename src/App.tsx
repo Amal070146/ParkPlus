@@ -19,7 +19,7 @@ import { Notifications } from "./Components/Notifications/Notifications";
 import PrivateRoutes from "./services/PrivateRoutes";
 import { SearchLocations } from "./Components/Schedule/SearchLocations";
 import { Toaster } from "react-hot-toast";
-import { defaultTheme, lightTheme, Provider } from "@adobe/react-spectrum";
+import { lightTheme, Provider } from "@adobe/react-spectrum";
 function App() {
     const router = createBrowserRouter([
         {
