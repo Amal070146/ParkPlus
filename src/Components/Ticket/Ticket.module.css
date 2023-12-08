@@ -10,3 +10,35 @@
   overflow-y: scroll;
   padding-bottom: 100px;
 }
+
+.InnerData {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3vh;
+}
+
+.InnerData .qrcode {
+  width: 90%;
+  max-width: 300px;
+}
+
+.InnerData .Details {
+  color: black;
+  background: #fcfafc;
+  box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  gap: 10px;
+}
+.InnerData .Details h2 {
+  font-weight: 600;
+}
+
+.InnerData .Details div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
