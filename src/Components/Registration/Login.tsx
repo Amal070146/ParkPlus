@@ -44,9 +44,9 @@ export const Login = () => {
             error: (error) => {
                 console.error(
                     "Failed to login:",
-                    error.response?.data?.message || "Error"
+                    error.response?.data?.detail || "Error"
                 );
-                return <b>Login failed.</b>;
+                return <b>{error.response?.data?.detail || "Login failed."}</b>;
             },
         });
     };
