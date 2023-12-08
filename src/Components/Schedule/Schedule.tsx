@@ -2,45 +2,13 @@ import { HeaderNav } from "../Navbar/HeaderNav";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Schedule.module.css";
 import { useNavigate } from "react-router-dom";
-
 import { useState } from "react";
-
-import "./calender.css";
 import { RightArrowsvg, Searchsvg } from "./svg";
 import { CalendarDate } from "@internationalized/date";
 import { Calendar } from "@react-spectrum/calendar";
 import Modal from "../../utils/Modal/Modal";
-type Props = {};
 
-export const Schedule = (_props: Props) => {
-    const data = [
-        {
-            vechilename: "Toyota",
-            regno: "KL-08-BK-0222",
-            owner: "Amal C P",
-        },
-        {
-            vechilename: "Toyota",
-            regno: "KL-08-BK-0222",
-            owner: "Amal C P",
-        },
-        {
-            vechilename: "Toyota",
-            regno: "KL-08-BK-0222",
-            owner: "Amal C P",
-        },
-        {
-            vechilename: "Toyota",
-            regno: "KL-08-BK-0222",
-            owner: "Amal C P",
-        },
-        {
-            vechilename: "Toyota",
-            regno: "KL-08-BK-0222",
-            owner: "Amal C P",
-        },
-    ];
-
+export const Schedule = () => {
     const [startTime, setStartTime] = useState<string>("");
     const [endTime, setEndTime] = useState<string>("");
     const [timeError, setTimeError] = useState<string>("");
