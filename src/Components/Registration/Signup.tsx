@@ -1,9 +1,16 @@
 import styles from "./register.module.css";
 import image from "./assets/image.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {
+    JSXElementConstructor,
+    ReactElement,
+    ReactNode,
+    ReactPortal,
+    useState,
+} from "react";
 import toast from "react-hot-toast";
 import { registerUser } from "./RegisterApis";
+import { JSX } from "react/jsx-runtime";
 
 export const Signup = () => {
     const navigate = useNavigate();
@@ -66,17 +73,19 @@ export const Signup = () => {
                 return <b>User registered successfully!</b>;
             },
             error: (error) => {
-                console.error(
-                    "Failed to register:",
-                    error.response.data.response
-                );
+                console.error("Failed to register:", error);
 
-                if (error.response.data?.response?.email)
-                    setData({
-                        ...data,
-                        emailError: error.response.data.response.email,
+                // Assuming error is in the format { username: [...], email: [...] }
+                const errors = error.response?.data || error;
+                let errorMessages: string[] = [];
+                Object.keys(errors).forEach((key) => {
+                    const messages = errors[key];
+                    messages.forEach((message: string) => {
+                        errorMessages.push(message);
                     });
-                return <b>Registration failed.</b>;
+                });
+
+                return <b>{errorMessages[0]}</b>;
             },
         });
     };
