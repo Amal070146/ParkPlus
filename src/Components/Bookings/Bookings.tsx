@@ -1,9 +1,15 @@
-import React from 'react'
+import { HeaderNav } from "../Navbar/HeaderNav";
+import { Navbar } from "../Navbar/Navbar";
+import styles from './Bookings.module.css'
 
-type Props = {}
+type Props = {};
 
 export const Bookings = (props: Props) => {
   return (
-    <div>Bookings</div>
-  )
-}
+    <div className={styles.BookingWrapper}>
+      {" "}
+      <HeaderNav title="Bookings" />
+      <Navbar />
+    </div>
+  );
+};

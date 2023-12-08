@@ -1,9 +1,11 @@
-import React from 'react'
-
-type Props = {}
+import { HeaderNav } from "../Navbar/HeaderNav";
+import { Navbar } from "../Navbar/Navbar";
+import styles from "./Wallet.module.css";
+type Props = {};
 
 export const Wallet = (props: Props) => {
-  return (
-    <div>Wallet</div>
-  )
-}
+  return <div className={styles.WalletWrapper}>
+    <HeaderNav title="Wallet" />
+    <Navbar />
+  </div>;
+};

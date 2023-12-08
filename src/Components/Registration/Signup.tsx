@@ -6,7 +6,7 @@ type Props = {};
 export const Signup = (_props: Props) => {
   const navigate = useNavigate();
   const navigateToDashboard = () => {
-    navigate("/dashboard");
+    navigate("/");
   };
   return (
     <div className={styles.RegistrationWrapper}>
