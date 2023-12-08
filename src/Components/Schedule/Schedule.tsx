@@ -1,6 +1,7 @@
 import { HeaderNav } from "../Navbar/HeaderNav";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Schedule.module.css";
+import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 import {
@@ -9,6 +10,7 @@ import {
 } from "@syncfusion/ej2-react-calendars";
 
 import "./calender.css";
+import { RightArrowsvg, Searchsvg } from "./svg";
 type Props = {};
 
 export const Schedule = (_props: Props) => {
@@ -56,6 +58,78 @@ export const Schedule = (_props: Props) => {
   const onDateChange = (args: ChangedEventArgs): void => {
     setCurrentDate(args.value || new Date());
   };
+
+  const [startTime, setStartTime] = useState<string>("");
+  const [endTime, setEndTime] = useState<string>("");
+  const [timeError, setTimeError] = useState<string>("");
+
+  const roundToNearest30Min = (time: Date) => {
+    const minutes = time.getMinutes();
+    const isUpperHalf = minutes >= 30;
+    const nearestHalfHour = isUpperHalf ? 30 : 0;
+    return new Date(time.setMinutes(nearestHalfHour, 0, 0));
+  };
+
+  const validateAndRoundTime = (start: string, end: string) => {
+    if (start && end) {
+      let startTime = new Date(`01/01/2000 ${start}`);
+      let endTime = new Date(`01/01/2000 ${end}`);
+      let diff = (endTime.getTime() - startTime.getTime()) / (1000 * 60);
+
+      if (diff % 30 !== 0) {
+        // Round the times to the nearest 30 minutes if necessary
+        startTime = roundToNearest30Min(startTime);
+        endTime = roundToNearest30Min(endTime);
+        setStartTime(startTime.toTimeString().substring(0, 5)); // Update state with rounded times
+        setEndTime(endTime.toTimeString().substring(0, 5));
+      }
+
+      // Recalculate the difference
+      diff = (endTime.getTime() - startTime.getTime()) / (1000 * 60);
+      if (diff < 30) {
+        setTimeError("Start and end time must be at least 30 minutes apart.");
+      } else {
+        setTimeError("");
+      }
+    }
+  };
+
+  const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStartTime(e.target.value);
+    validateAndRoundTime(e.target.value, endTime);
+  };
+
+  const handleEndTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEndTime(e.target.value);
+    validateAndRoundTime(startTime, e.target.value);
+  };
+
+
+   const [location, setLocation] = useState("");
+ const navigate = useNavigate();
+
+ const handleButtonClick = () => {
+   navigate("/searchloaction", { state: { location } });
+ };
+
+ const addon = [
+   {
+     checked: true,
+     name: "Car wash",
+   },
+   {
+     checked: false,
+     name: "Car clean",
+   },
+   {
+     checked: true,
+     name: "Car wash",
+   },
+   {
+     checked: false,
+     name: "Car clean",
+   },
+ ];
   return (
     <div className={styles.ScheduleWrapper}>
       {" "}
@@ -105,15 +179,56 @@ export const Schedule = (_props: Props) => {
             </div>
           </div>
         </div>
-        <div>
+        <div className={styles.TimeSelectWrapper}>
           <h2>3.Select Time</h2>
-          <div>
-            <input className={styles.StartTime} type="text" name="" id="" />
-            <input className={styles.EndTime} type="text" name="" id="" />
+          <div className={styles.inputofTime}>
+            <input
+              className={styles.StartTime}
+              type="time"
+              value={startTime}
+              placeholder="7:30"
+              onChange={handleStartTimeChange}
+            />
+            <input
+              className={styles.EndTime}
+              type="time"
+              value={endTime}
+              placeholder="7:30"
+              onChange={handleEndTimeChange}
+            />
           </div>
         </div>
-        <div></div>
-        <div></div>
+        <div>
+          <h2>4.Select Location</h2>
+          <div className={styles.locationContainer}>
+            <Searchsvg />
+            <input
+              type="text"
+              placeholder="Search Your Parking locations"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+            <button onClick={handleButtonClick}>
+              <RightArrowsvg />
+            </button>
+          </div>
+        </div>
+        <div>
+          <h2>5.Add-On</h2>
+          <div className={styles.AddonContainer}>
+            {addon.map(({ name, checked }, index) => (
+              <div className={styles.addOnContainer} key={index}>
+                <input
+                  type="checkbox"
+                  id={`checkbox-${index}`}
+                  checked={checked}
+                />
+                <label htmlFor={`checkbox-${index}`}>{name}</label>
+              </div>
+            ))}
+          </div>
+        </div>
+        <button type="submit">Book</button>
       </div>
       <Navbar />
     </div>

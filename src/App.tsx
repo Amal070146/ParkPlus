@@ -17,6 +17,7 @@ import { DeleteSuccess } from "./Components/Successpage/DeleteSuccess";
 import { QRScanner } from "./Components/QRScanner/QRScanner";
 import { Notifications } from "./Components/Notifications/Notifications";
 import PrivateRoutes from "./services/PrivateRoutes";
+import { SearchLocations } from "./Components/Schedule/SearchLocations";
 import { Toaster } from "react-hot-toast";
 function App() {
     const router = createBrowserRouter([
