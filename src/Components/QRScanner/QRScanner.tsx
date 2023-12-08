@@ -4,7 +4,7 @@ import styles from './QRScanner.module.css'
 
 type Props = {}
 
-export const QRScanner = (props: Props) => {
+export const QRScanner = (_props: Props) => {
   return (
     <div className={styles.QRscannerWrapper}> 
       {" "}

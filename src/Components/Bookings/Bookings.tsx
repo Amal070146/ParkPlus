@@ -4,7 +4,7 @@ import styles from './Bookings.module.css'
 
 type Props = {};
 
-export const Bookings = (props: Props) => {
+export const Bookings = (_props: Props) => {
   return (
     <div className={styles.BookingWrapper}>
       {" "}

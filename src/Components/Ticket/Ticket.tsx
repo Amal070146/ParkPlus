@@ -1,9 +1,16 @@
-import React from 'react'
+import { HeaderNav } from "../Navbar/HeaderNav";
+import { Navbar } from "../Navbar/Navbar";
+import styles from './Ticket.module.css'
 
-type Props = {}
+type Props = {};
 
-export const Ticket = (props: Props) => {
+export const Ticket = (_props: Props) => {
   return (
-    <div>Ticket</div>
-  )
-}
+    <div className={styles.TicketWrapper}>
+      {" "}
+      <HeaderNav title="Ticket" />
+
+      <Navbar />
+    </div>
+  );
+};

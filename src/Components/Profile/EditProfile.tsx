@@ -1,9 +1,15 @@
-import React from 'react'
+import { HeaderNav } from '../Navbar/HeaderNav';
+import { Navbar } from '../Navbar/Navbar';
+import styles from './Profile.module.css'
 
 type Props = {}
 
-export const EditProfile = (props: Props) => {
+export const EditProfile = (_props: Props) => {
   return (
-    <div>EditProfile</div>
-  )
+    <div className={styles.EditProfileWrapper}>
+      {" "}
+      <HeaderNav title="EditProfile" />
+      <Navbar />
+    </div>
+  );
 }
