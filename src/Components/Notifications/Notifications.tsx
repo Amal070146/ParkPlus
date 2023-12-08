@@ -1,9 +1,14 @@
-import React from 'react'
+import { HeaderNav } from "../Navbar/HeaderNav";
+import { Navbar } from "../Navbar/Navbar";
 
 type Props = {}
 
-export const Notifications = (props: Props) => {
+export const Notifications = (_props: Props) => {
   return (
-    <div>Notifications</div>
-  )
+    <div>
+      {" "}
+      <HeaderNav title="Notifications" />
+      <Navbar />
+    </div>
+  );
 }

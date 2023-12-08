@@ -19,9 +19,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 5px;
-  .RightArrow {
-    transform: rotate(180deg);
-  }
+}
+.dasboardSliderWrapper .RightArrow {
+  transform: rotate(180deg);
 }
 
 .CardsWrapper {
@@ -31,33 +31,36 @@
   overflow-x: hidden;
   background-color: #1e3d6b;
   border-radius: 25px;
-  .IndividualCards {
-    min-width: 100%;
-    height: 220px;
-    background-color: #1e3d6b;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    color: white;
-    .content {
-      display: flex;
-      align-items: center;
-      background-color: white;
-      color: black;
-      font-size: 14px;
-      width: 90%;
-      justify-content: space-between;
-      padding: 5px 10px;
-      border-radius: 10px;
-      .RateWrap {
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-      }
-    }
-  }
+}
+
+.CardsWrapper .IndividualCards {
+  min-width: 100%;
+  height: 220px;
+  background-color: #1e3d6b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+}
+
+.CardsWrapper .IndividualCards .content {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  width: 90%;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.CardsWrapper .IndividualCards .content .RateWrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
 }
 
 /* Style the individual swiper slides */
@@ -66,11 +69,13 @@
   height: 300px;
   background-color: #1e3d6b;
   border-radius: 20px;
-  iframe {
+ 
+}
+
+.MApWrapper  iframe {
     width: 100%;
     height: 100%;
   }
-}
 
 .DashboardWrapper > a {
   background-color: #1e3d6b;

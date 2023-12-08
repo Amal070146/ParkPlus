@@ -3,7 +3,7 @@ import image from './assets/image.png'
 import { useNavigate } from "react-router-dom";
 type Props = {}
 
-export const Login = (props: Props) => {
+export const Login = (_props: Props) => {
    const navigate = useNavigate();
    const navigateToDashboard = () => {
      navigate("/dashboard");
