@@ -10,3 +10,55 @@
   padding-bottom: 100px;
   color: black;
 }
+
+.DetailsWrapper {
+  height: 80vh;
+  overflow-y: scroll;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.DetailsWrapper h1 {
+  font-size: 25px;
+  letter-spacing: 5px;
+}
+.DetailsWrapper .scheduleWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.DetailsWrapper .scheduleWrap .Datas {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: scroll;
+  width: 100%;
+  gap: 20px;
+}
+
+.DetailsWrapper .scheduleWrap .Datas .IndividualCont {
+  display: flex;
+  width: 100%;
+  border-radius: 22.882px;
+  background: #fcfafc;
+  box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  gap: 10px;
+  align-items: center;
+}
+
+.DetailsWrapper .scheduleWrap .Datas .IndividualCont .Dates{
+  border: 2px solid #1E3D6B;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  gap: 3px;
+}
