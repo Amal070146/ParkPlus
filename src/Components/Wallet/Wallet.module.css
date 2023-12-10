@@ -10,3 +10,132 @@
   padding-bottom: 100px;
   color: black;
 }
+
+.DetailsWrapper {
+  height: 80vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  align-items: center;
+}
+.CardsWrapper {
+  display: flex;
+  width: 100%;
+  background-color: #1e3d6b;
+  border-radius: 20px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  padding-left: 20px;
+}
+.CardsWrapper .imagecont {
+  background: url("./coin.png") center center/contain #1e3d6b no-repeat;
+
+  background-blend-mode: lighten;
+  height: 200px;
+  width: 40%;
+  border-radius: 40%;
+}
+
+.CardsWrapper .BalanceConatiner {
+  width: 60%;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.CardsWrapper .BalanceConatiner .ValueDiv {
+  position: absolute;
+  z-index: 500;
+}
+.CardsWrapper .BalanceConatiner .imagecont {
+  background: url("./coin.png") center center/contain #1e3d6b no-repeat;
+
+  background-blend-mode: lighten;
+  height: 200px;
+  width: 100%;
+  border-radius: 40%;
+  z-index: 100;
+  opacity: 40%;
+}
+.DetailsWrapper > button {
+  background-color: #1e3d6b;
+  color: white;
+  width: 170px;
+  padding: 10px 20px;
+  font-size: 17px;
+}
+
+.DetailsWrapper .transactionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.DetailsWrapper .transactionWrapper > h2 {
+  font-size: 25px;
+  color: #1e3d6b;
+  letter-spacing: 5px;
+}
+
+.DetailsWrapper .transactionWrapper .ContentWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 20px;
+  background: #fcfafc;
+
+  box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.1);
+  height: 33vh;
+  overflow-y: scroll;
+  padding: 10px 0px;
+}
+
+.DetailsWrapper .transactionWrapper .ContentWrapper .Individals {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  padding: 5px 10px;
+  align-items: center;
+}
+.DetailsWrapper .transactionWrapper .ContentWrapper .Individals .ExtraWrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  color: #1e3d6b;
+}
+.DetailsWrapper .transactionWrapper .ContentWrapper .Individals .titleWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.DetailsWrapper .transactionWrapper .ContentWrapper .Individals .amount {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.DetailsWrapper
+  .transactionWrapper
+  .ContentWrapper
+  .Individals
+  .amount
+  .imagecont {
+  background: url("./coin.png") center center/contain #1a3f77 no-repeat;
+
+  background-blend-mode: lighten;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  opacity: 40%;
+}
+.DetailsWrapper .transactionWrapper .ContentWrapper .Individals > img {
+  object-fit: contain;
+  width: 30px;
+}
