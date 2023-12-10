@@ -28,6 +28,7 @@
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  width: 100%;
 }
 
 .DetailsWrapper .scheduleWrap .Datas {
@@ -51,8 +52,8 @@
   align-items: center;
 }
 
-.DetailsWrapper .scheduleWrap .Datas .IndividualCont .Dates{
-  border: 2px solid #1E3D6B;
+.DetailsWrapper .scheduleWrap .Datas .IndividualCont .Dates {
+  border: 2px solid #1e3d6b;
   border-radius: 10px;
   padding: 10px;
   display: flex;
@@ -61,4 +62,35 @@
   justify-content: center;
   line-height: 1;
   gap: 3px;
+}
+.DetailsWrapper .pastBookingWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+.DetailsWrapper .pastBookingWrap .TableWrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  height: 35vh;
+  overflow-y: scroll;
+}
+.DetailsWrapper .pastBookingWrap .TableWrap > div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid #1e3d6b;
+  padding:5px 0px 15px 0px;
+  line-height: 1;
+}
+.DetailsWrapper .pastBookingWrap .TableWrap > div:first-child,
+.DetailsWrapper .pastBookingWrap .TableWrap > div:last-child {
+  border-bottom: none;
+}
+.DetailsWrapper .pastBookingWrap .TableWrap > div > p {
+  width: 33%;
+  text-align: center;
 }

@@ -31,6 +31,18 @@ export const Bookings = (_props: Props) => {
       time: "7:30am to 9:30pm",
       amount: 360,
     },
+    {
+      date: "25-09-2002",
+      place: "TSR parking",
+      time: "7:30am to 9:30pm",
+      amount: 360,
+    },
+    {
+      date: "25-09-2002",
+      place: "TSR parking",
+      time: "7:30am to 9:30pm",
+      amount: 360,
+    },
   ];
 
   const getMonthAbbreviation = (monthNum: string | number) => {
@@ -82,8 +94,9 @@ export const Bookings = (_props: Props) => {
         </div>
         <div className={styles.pastBookingWrap}>
           <h1>Past Booking</h1>
-          <div>
-            <div>
+          <div className={styles.TableWrap}>
+            <div style={{fontSize:"18px",fontWeight:700}}>
+             
               <p>Place</p> <p>Date</p>
               <p>Amount</p>
             </div>
