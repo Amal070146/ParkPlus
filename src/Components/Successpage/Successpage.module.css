@@ -10,3 +10,36 @@
   overflow-y: scroll;
   padding-bottom: 100px;
 }
+
+.DivSection {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  gap: 15vh;
+}
+.DivSection .ImageWrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.DivSection .ImageWrapper h2{
+  font-size: 30px;
+  line-height: 1.2;
+  color:#1E3D6B ;
+}
+.DivSection img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.DivSection button{
+  color: white;
+  background-color: #1E3D6B;
+  padding: 10px 20px;
+  min-width: 150px;
+  font-size: 17px;
+}

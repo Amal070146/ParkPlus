@@ -21,7 +21,7 @@ export const Ticket = (_props: Props) => {
             <p>Time:</p> <p>Duration:2hrs</p>
           </div>
         </div>
-        <div>
+        <div className={styles.ButtonWrapper}>
           <button>Download</button>
           <button>Share</button>
         </div>

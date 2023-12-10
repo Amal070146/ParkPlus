@@ -2,15 +2,15 @@ import styles from "./register.module.css";
 import image from "./assets/image.png";
 import { useNavigate } from "react-router-dom";
 import {
-    JSXElementConstructor,
-    ReactElement,
-    ReactNode,
-    ReactPortal,
+    // JSXElementConstructor,
+    // ReactElement,
+    // ReactNode,
+    // ReactPortal,
     useState,
 } from "react";
 import toast from "react-hot-toast";
 import { registerUser } from "./RegisterApis";
-import { JSX } from "react/jsx-runtime";
+// import { JSX } from "react/jsx-runtime";
 
 export const Signup = () => {
     const navigate = useNavigate();
