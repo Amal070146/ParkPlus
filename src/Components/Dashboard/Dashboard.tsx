@@ -3,7 +3,6 @@ import { Navbar } from "../Navbar/Navbar";
 import { HeaderNav } from "../Navbar/HeaderNav";
 import styles from "./Dashboard.module.css";
 import { ArrowLeftsvg, Dirctionsvg } from "./svg";
-import demo from "./assets/demo.png";
 import { Map, Marker } from "pigeon-maps";
 import toast from "react-hot-toast";
 import { getNearbyParking } from "./DashboardApis";
@@ -58,10 +57,8 @@ export const Dashboard = () => {
         handleFetchDetails();
     }, [data]);
 
-    //Old Code
-
     const [currentSlide, setCurrentSlide] = useState(0);
-    const totalSlides = 3; // Adjust this based on the total number of slides you have
+    const totalSlides = data.length; 
     const handleLeftArrowClick = () => {
         setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
     };
