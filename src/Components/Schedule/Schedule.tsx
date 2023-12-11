@@ -2,12 +2,14 @@ import { HeaderNav } from "../Navbar/HeaderNav";
 import { Navbar } from "../Navbar/Navbar";
 import styles from "./Schedule.module.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RightArrowsvg, Searchsvg } from "./svg";
 import { CalendarDate } from "@internationalized/date";
 import { Calendar } from "@react-spectrum/calendar";
 import Modal from "../../utils/Modal/Modal";
 import toast from "react-hot-toast";
+import { getVehicles } from "../AddVehicle/AddVehicleApi";
+import { ParkingSchedule } from "./ScheduleApi";
 
 export const Schedule = () => {
     const [startTime, setStartTime] = useState<string>("");
@@ -89,46 +91,41 @@ export const Schedule = () => {
     const [formData, setFormData] = useState<Schedule>({
       startTime: "",
       endTime: "",
-      vehicle: {
-        name: "",
-        regno: "",
-        owner: "",
-      },
+      vehicle: "",
       location: "",
     });
 
-    // const [modalOpen, setModalOpen] = useState(false);
-    // const [removeModalOpen, setRemoveModalOpen] = useState(false);
-    // const openModal = () => setModalOpen(true);
-    // const closeModal = () => setModalOpen(false);
-    // const [newVehicle, setNewVehicle] = useState<VehicleDetails>({
-    //     name: "",
-    //     regno: "",
-    //     owner: "",
-    // });
+   
+    const [data, setData] = useState<Vehicles[]>([]);
 
-    // const loadVehicles = (): VehicleDetails[] => {
-    //     const storedVehicles = localStorage.getItem("vehicles");
-    //     return storedVehicles ? JSON.parse(storedVehicles) : [];
-    // };
-    // const saveVehicles = (vehicles: VehicleDetails[]) => {
-    //     localStorage.setItem("vehicles", JSON.stringify(vehicles));
-    // };
-    // const [vehicles, setVehicles] = useState<VehicleDetails[]>(loadVehicles);
+    const handleFetchDetails = async () => {
+        try {
+            const response = await getVehicles();
+            if (response) {
+                setData(response);
+                console.log(data);
+            }
+        } catch (error) {
+            toast.error("Something went wrong, failed to load data");
+        }
+    };
+
+    useEffect(() => {
+        handleFetchDetails();
+    }, [data]);
+
 
     const handleAddVehicle = () => {
-        navigate("/addvehicle");
+        navigate("/vehicles");
     };
 
 
-    const handleVehicleSelect = () => {
-      setFormData(()=> formData.vehicle)
+    const handleVehicleSelect = (id: string) => {
+      setFormData(prev => ({
+        ...prev,
+        vehicle:id
+      }))
     }
-    // const handleRemoveVehicle = (index: number) => {
-    //     const newVehicles = vehicles.filter((_, i) => i !== index);
-    //     setVehicles(newVehicles);
-    //     saveVehicles(newVehicles);
-    // };
 
     const validateForm = (e: Schedule) => {
       let errors: { [key: string]: string } = {};
@@ -161,26 +158,21 @@ export const Schedule = () => {
           const data = new FormData();
           data.append("startTime", formData.startTime);
           data.append("endTime", formData.endTime);
-          data.append("vehicle", formData.vehicle.regno);
+          data.append("vehicle", formData.vehicle);
           data.append("location", formData.location);
           if (selectedDate) {
               data.append("data", selectedDate.toString());
           }
 
-          toast.promise(reportMeeting(props.id, data), {
-              loading: "Reporting...",
+          toast.promise(ParkingSchedule( data), {
+              loading: "Loading...",
               success: response => {
-                  console.log("Meeting successfully reported:", response);
-                  props.setTemp(prevState => ({
-                      ...prevState,
-                      isReport: false,
-                      reRender: !prevState.reRender
-                  }));
-                  return <b>Meeting successfully reported!</b>;
+                  console.log("Parking successfully scheduled:", response);
+                  return <b>Parking successfully scheduled!</b>;
               },
               error: error => {
                   console.error("Failed to login:", error);
-                  return <b>Failed to report meeting!</b>;
+                  return <b>Failed!</b>;
               }
           });
       }
@@ -193,11 +185,11 @@ export const Schedule = () => {
           <div className={styles.selectVehicle}>
             <h2>1.Select Vehicle</h2>
             <div className={styles.AddVechileCardWrap}>
-              {formData.map((vehicle, index) => (
+              {data.map((vehicle, index) => (
                 <>
-                  <div key={index} onClick={() => handleVehicleSelect}>
-                    <p>{vehicle.name}</p>
-                    <p>{vehicle.regno}</p>
+                  <div key={index} onClick={() => handleVehicleSelect(vehicle.id)}>
+                    <p>{vehicle.model}</p>
+                    <p>{vehicle.vehicleNumber}</p>
                     <p>{vehicle.owner}</p>
                   </div>
                   
