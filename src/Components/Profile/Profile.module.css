@@ -1,5 +1,6 @@
 .ProfileWrapper,
-.EditProfileWrapper {
+.EditProfileWrapper,
+.AddVehicleWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,8 +114,12 @@
   border-color: #1e3d6b;
 }
 
-.EditProfileWrapper .DetailSection button{
+.EditProfileWrapper .DetailSection button {
   width: 170px;
   background-color: #1e3d6b;
   color: white;
+}
+
+/* Add Vehicles */
+.AddVehicleWrapper {
 }
