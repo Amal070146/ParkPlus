@@ -78,3 +78,43 @@
   gap: 20px;
   align-items: center;
 }
+
+/* Edit profile page */
+.EditProfileWrapper .DetailSection {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10vh;
+  align-items: center;
+}
+.EditProfileWrapper .DetailSection > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.EditProfileWrapper .DetailSection > div > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+.EditProfileWrapper .DetailSection > div > div h2 {
+  color: #1e3d6b;
+}
+.EditProfileWrapper .DetailSection > div > div input {
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  color: black;
+  border-color: #1e3d6b;
+}
+
+.EditProfileWrapper .DetailSection button{
+  width: 170px;
+  background-color: #1e3d6b;
+  color: white;
+}
