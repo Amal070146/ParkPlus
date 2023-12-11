@@ -1,0 +1,27 @@
+.vehicleWrapper {
+    width: 100%;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.vehicleCardsWrapper {
+	padding-top: 2rem;
+    display: flex;
+	position: relative;
+	top: 0;
+    left: 3.5%;
+    justify-content: start;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.vehicleCards {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+	border-radius: 10px;
+}

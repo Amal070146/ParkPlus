@@ -46,7 +46,7 @@ export const Profile = (_props: Props) => {
                         </div>
                         <RightArrowsvg />
                     </button>
-                    <button onClick={ButtonSubmit("/addvehicle")}>
+                    <button onClick={ButtonSubmit("/vehicles")}>
                         <div>
                             <Locationsvg />
                             <h2>Add Vehicle</h2>
