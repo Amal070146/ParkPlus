@@ -1,5 +1,6 @@
 .ProfileWrapper,
-.EditProfileWrapper {
+.EditProfileWrapper,
+.AddVehicleWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,8 +114,60 @@
   border-color: #1e3d6b;
 }
 
-.EditProfileWrapper .DetailSection button{
+.EditProfileWrapper .DetailSection button {
   width: 170px;
   background-color: #1e3d6b;
   color: white;
+}
+
+/* Add Vehicles */
+.AddVehicleWrapper .Details {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
+}
+
+.AddVehicleWrapper .Details button {
+  width: calc(50% - 5px);
+  box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 15px;
+  background-color: #fcfcfc;
+  color: black;
+}
+
+.AddVehicleWrapper .modalForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	padding: 20px 0px;
+}
+
+.AddVehicleWrapper .modalForm div {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.AddVehicleWrapper .modalForm div input {
+	padding: 10px;
+	background-color: lightgray;
+	border: none;
+	border-radius: 10px;
+	width: 90%;
+}
+
+.AddVehicleWrapper .modalForm button {
+	padding: 10px;
+	background-color: #1e3d6b;
+	color: white ;
+	border: none;
+	border-radius: 10px;
+	width: 50%;
 }
