@@ -1,79 +1,190 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { HeaderNav } from "../Navbar/HeaderNav";
 import styles from "./Dashboard.module.css";
 import { ArrowLeftsvg, Dirctionsvg } from "./svg";
-import demo from "./assets/demo.png";
+import { Map, Marker } from "pigeon-maps";
+import toast from "react-hot-toast";
+import { getNearbyParking } from "./DashboardApis";
 
-type Props = {};
+export const Dashboard = () => {
+    const [location, setLocation] = useState<LocationState>({
+        latitude: null,
+        longitude: null,
+    });
 
-export const Dashboard = (_props: Props) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 3; // Adjust this based on the total number of slides you have
+    useEffect(() => {
+        if (!navigator.geolocation) {
+            setLocation((prevState) => ({
+                ...prevState,
+                error: "Geolocation is not supported by your browser.",
+            }));
+            return;
+        }
 
-  const handleLeftArrowClick = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setLocation({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                });
+                console.log(location);
+            },
+            () => {
+                setLocation((prevState) => ({
+                    ...prevState,
+                    error: "Unable to retrieve your location.",
+                }));
+            }
+        );
+    }, [2000]);
 
-  const handleRightArrowClick = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
+    const [data, setData] = useState<NearbyParkings[]>([]);
 
-  return (
-    <div className={styles.DashboardWrapper}>
-      <HeaderNav title="Dashboard" />
-      <div className={styles.dasboardSliderWrapper}>
-        <div className={styles.LeftArrow} onClick={handleLeftArrowClick}>
-          <ArrowLeftsvg />
-        </div>
-        <div className={styles.CardsWrapper}>
-          <div
-            className={styles.IndividualCards}
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-          >
-            <img src={demo} alt="" />
-            <div className={styles.content}>
-              <div>
-                <h4>Thrissur Parking</h4>
-                <div className={styles.RateWrap}>
-                  <p>Pay : 30/hr</p>
-                  <p>5/50</p>
+    const handleFetchDetails = async () => {
+        try {
+            const response = await getNearbyParking(location);
+            if (response) {
+                setData(response);
+                console.log(data);
+            }
+        } catch (error) {
+            toast.error("Something went wrong, failed to load data");
+        }
+    };
+
+    useEffect(() => {
+        handleFetchDetails();
+    }, [data]);
+
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const totalSlides = data.length; 
+    const handleLeftArrowClick = () => {
+        setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    };
+
+    const handleRightArrowClick = () => {
+        setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    };
+
+    return (
+        <div className={styles.DashboardWrapper}>
+            <HeaderNav title="Dashboard" />
+            <div className={styles.dasboardSliderWrapper}>
+                <div
+                    className={styles.LeftArrow}
+                    onClick={handleLeftArrowClick}
+                >
+                    <ArrowLeftsvg />
                 </div>
-              </div>
-              <a href="">
-                <Dirctionsvg />
-              </a>
+                <div className={styles.CardsWrapper}>
+                    {data.map((item) => (
+                        <div
+                            className={styles.IndividualCards}
+                            style={{
+                                transform: `translateX(-${
+                                    currentSlide * 100
+                                }%)`,
+                            }}
+                        >
+                            <img src={item.image} width={250} height={150} alt="Parking space image" />
+                            <div className={styles.content}>
+                                <div>
+                                    <h4>{item.name}</h4>
+                                    <div className={styles.RateWrap}>
+                                        <p>Pay : {item.rate}/hr </p>
+                                        <p>
+											{" "}Available :
+                                            {item.capacity.available}/
+                                            {item.capacity.total}
+                                        </p>
+                                    </div>
+                                </div>
+                                <a
+                                    href={`https://maps.google.com/?q=${item.latitude},${item.longitude}`}
+                                >
+                                    <Dirctionsvg />
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                    <div
+                        className={styles.IndividualCards}
+                        style={{
+                            transform: `translateX(-${currentSlide * 100}%)`,
+                        }}
+                    >
+                        Slide 2
+                    </div>
+                    <div
+                        className={styles.IndividualCards}
+                        style={{
+                            transform: `translateX(-${currentSlide * 100}%)`,
+                        }}
+                    >
+                        Slide 3
+                    </div>
+                </div>
+                <div
+                    className={styles.RightArrow}
+                    onClick={handleRightArrowClick}
+                >
+                    <ArrowLeftsvg />
+                </div>
             </div>
-          </div>
-          <div
-            className={styles.IndividualCards}
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-          >
-            Slide 2
-          </div>
-          <div
-            className={styles.IndividualCards}
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-          >
-            Slide 3
-          </div>
+            <div className={styles.MApWrapper}>
+                {location.error ? (
+                    <p>Error: {location.error}</p>
+                ) : (
+                    location.latitude &&
+                    location.longitude && (
+                        <Map
+                            height={300}
+                            defaultCenter={[
+                                location.latitude || 0,
+                                location.longitude || 0,
+                            ]}
+                            defaultZoom={15}
+                        >
+                            <Marker
+                                color="blue"
+                                onClick={() =>
+                                    window.open(
+                                        `https://maps.google.com/?q=${location.latitude},${location.longitude}`,
+                                        "_blank"
+                                    )
+                                }
+                                width={50}
+                                anchor={[
+                                    location.latitude || 0,
+                                    location.longitude || 0,
+                                ]}
+                            />
+                            {data &&
+                                data.map((parking) => (
+                                    <Marker
+                                        color={`${
+                                            parking.booked ? "red" : "grey"
+                                        }`}
+                                        onClick={() =>
+                                            window.open(
+                                                `https://maps.google.com/?q=${parking.latitude},${parking.longitude}`,
+                                                "_blank"
+                                            )
+                                        }
+                                        width={50}
+                                        anchor={[
+                                            parking.latitude || 0,
+                                            parking.longitude || 0,
+                                        ]}
+                                    />
+                                ))}
+                        </Map>
+                    )
+                )}
+            </div>
+            <a href="/schedule">Book Slot</a>
+            <Navbar />
         </div>
-        <div className={styles.RightArrow} onClick={handleRightArrowClick}>
-          <ArrowLeftsvg />
-        </div>
-      </div>
-      <div className={styles.MApWrapper}>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.7114276054135!2d76.22642621137412!3d10.523379689567179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7efb472915953%3A0x480319a6bed517f8!2sNirmalamatha%20Central%20School!5e0!3m2!1sen!2sin!4v1701978527986!5m2!1sen!2sin"
-        
-          style={{ border: "0" }} // Note the change here
-          allowFullScreen={true} // Changed to camelCase
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade" // Changed to camelCase
-        ></iframe>
-      </div>
-      <a href="/schedule">Book Slot</a>
-      <Navbar />
-    </div>
-  );
+    );
 };
