@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { getVehicles } from "./AddVehicleApi";
 type Props = {};
 
-const AddVehicle = (props: Props) => {
+const AddVehicle = (_props: Props) => {
 	const [data, setData] = useState<Vehicles[]>([]);
 
     const handleFetchDetails = async () => {
