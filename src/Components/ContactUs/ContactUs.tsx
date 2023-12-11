@@ -13,6 +13,7 @@ export const ContactUs = () => {
         <input type="text" placeholder="Name"/>
         <input type="text" placeholder="Email"/>
         <textarea name="" id="" placeholder="Message"></textarea>
+        <button>Submit</button>
       </div>
       <Navbar />
     </div>
