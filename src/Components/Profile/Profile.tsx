@@ -9,6 +9,9 @@ export const Profile = (_props: Props) => {
     <div className={styles.ProfileWrapper}>
       {" "}
       <HeaderNav title="Profile" />
+      <div>
+        
+      </div>
       <Navbar />
     </div>
   );
