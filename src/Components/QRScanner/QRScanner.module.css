@@ -10,3 +10,19 @@
   padding-bottom: 100px;
   color: black;
 }
+
+.QRscannerWrapper .Details {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.QRscannerWrapper .Details button{
+  background-color: #1e3d6b;
+  color: white;
+  width: 170px;
+  padding: 10px;
+  font-size: 17px;
+}
