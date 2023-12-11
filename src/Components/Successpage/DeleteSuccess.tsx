@@ -9,11 +9,11 @@ export const DeleteSuccess = (_props: Props) => {
     <div className={styles.DeleteSuccessWrapper}>
       {" "}
       <HeaderNav title="DeleteSuccess" />
-      <div>
-        <div>
+      <div className={styles.DivSection}>
+        <div className={styles.ImageWrapper}>
           <img src={image} alt="" />
           <div>
-            <h3>Are you sure ?</h3>
+            <h2>Are you sure ?</h2>
             <p>
               You are about to permanently delete your account, are you okay
               with that ?

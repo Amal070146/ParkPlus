@@ -43,3 +43,12 @@
   min-width: 150px;
   font-size: 17px;
 }
+
+.DeleteSuccessWrapper .DivSection img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
+.DeleteSuccessWrapper .DivSection button{
+  background-color: red;
+}
