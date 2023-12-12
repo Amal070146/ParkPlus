@@ -1,84 +1,76 @@
 .vehicleWrapper {
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  gap: 15px;
+  height: 100vh;
+  overflow-y: scroll;
+  padding-bottom: 100px;
 }
 
 .vehicleCardsWrapper {
-    padding-top: 2rem;
-    display: flex;
-    position: relative;
-    top: 0;
-    left: 3.5%;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
 }
 
 .vehicleCards {
-    width: 45%;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid;
-    border-radius: 10px;
-    position: relative;
+  width: calc(50% - 5px);
+  box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 15px;
+  background-color: #fcfcfc;
+  color: black;
 }
 
 .delete {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: -5px;
-    font-weight: bold;
-    background-color: aliceblue;
-    padding: 5px;
-    right: -5px;
-    border-radius: 50%;
-    width: 30px;
-    cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  font-weight: bold;
+  background-color: aliceblue;
+  padding: 5px;
+  right: -5px;
+  border-radius: 50%;
+  width: 30px;
+  cursor: pointer;
+}
+.vehicleWrapper .modalForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0px;
 }
 
-.modalForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 0px;
+.vehicleWrapper .modalForm div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.modalForm div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+.vehicleWrapper .modalForm div input {
+  padding: 10px;
+  background-color: lightgray;
+  border: none;
+  border-radius: 10px;
+  width: 90%;
 }
 
-.modalForm div input {
-    padding: 10px;
-    background-color: lightgray;
-    border: none;
-    border-radius: 10px;
-    width: 90%;
-}
-
-.modalForm button,
-.removeModalForm button {
-    padding: 10px;
-    background-color: #1e3d6b;
-    color: white !important;
-    border: none;
-    border-radius: 10px;
-    width: 50%;
-}
-.formWrapper > button {
-    color: white;
-    padding: 15px;
-    width: 170px;
+.vehicleWrapper .modalForm button {
+  padding: 10px;
+  background-color: #1e3d6b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  width: 50%;
 }
