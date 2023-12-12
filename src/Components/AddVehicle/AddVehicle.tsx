@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./AddVehicles.module.css";
 import toast from "react-hot-toast";
 import { addVehicle, getVehicles, removeVehicle } from "./AddVehicleApi";
-type Props = {};
 
-const AddVehicle = (_props: Props) => {
+const AddVehicle = () => {
     const [data, setData] = useState<Vehicles[]>([]);
     const [isOpen, setIsOpen] = useState(false);
 
