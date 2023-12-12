@@ -1,5 +1,13 @@
 interface VehicleDetails {
-	name: string
-	regno: string
-	owner: string
+	id: string;
+	model: string;
+	vehicleNumber: string;
+	owner: string;
+}
+
+interface Schedule {
+	startTime: string
+	endTime: string
+	vehicle: string;
+	location: string
 }
