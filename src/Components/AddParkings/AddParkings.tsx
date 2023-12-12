@@ -8,6 +8,7 @@ export const AddParkings = (_props: Props) => {
   return (
     <div className={styles.AddParkingsWrapper}>
       <HeaderNav title={"Add Parkings"} />
+      <div className={styles.DetailsWrapper}></div>
       <Navbar />
     </div>
   );
