@@ -47,7 +47,7 @@
   background: #fcfafc;
   box-shadow: -2px 4px 16px 0px rgba(0, 0, 0, 0.25);
 }
-.detailsWrapper .DetailSection .UploadSection label{
+.detailsWrapper .DetailSection .UploadSection label {
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -58,9 +58,31 @@
   color: white;
   max-height: 300px;
   width: 100%;
+  overflow: hidden;
 }
 
-.detailsWrapper .DetailSection .UploadSection label img{
+.detailsWrapper .DetailSection .UploadSection label img {
   width: 100%;
   object-fit: contain;
+  height: 100%;
+}
+
+.detailsWrapper .DetailSection .EnterLocation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 18px;
+}
+
+.detailsWrapper .DetailSection .EnterLocation div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #1e3d6b;
+  padding: 5px;
+  border-radius: 10px;
+  gap: 5px;
+}
+.detailsWrapper .DetailSection .EnterLocation div input {
+  border: none;
 }

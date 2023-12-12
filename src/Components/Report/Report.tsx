@@ -11,13 +11,13 @@ export const Report = (_props: Props) => {
   const [image, setImage] = useState("");
   const [isImageSelected, setIsImageSelected] = useState(false);
 
-   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-     if (e.target.files && e.target.files.length > 0) {
-       const img = e.target.files[0];
-       setImage(URL.createObjectURL(img));
-       setIsImageSelected(true);
-     }
-   };
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const img = e.target.files[0];
+      setImage(URL.createObjectURL(img));
+      setIsImageSelected(true);
+    }
+  };
   return (
     <div className={styles.ReportWrapper}>
       {" "}
@@ -30,11 +30,7 @@ export const Report = (_props: Props) => {
               Please upload a clear picture of the dump. (PNG, JPG images are
               preferred)
             </p>
-            <label
-              htmlFor="file-upload"
-              className={isImageSelected ? styles.sectionAfter : ""}
-              style={{ cursor: "pointer" }}
-            >
+            <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
               <input
                 id="file-upload"
                 type="file"
@@ -46,7 +42,7 @@ export const Report = (_props: Props) => {
 
               {!isImageSelected && (
                 <div className={styles.sectionBefore}>
-                  <img style={{width:"100px"}} src={images} alt="Default" />{" "}
+                  <img style={{ width: "100px" }} src={images} alt="Default" />{" "}
                   {/* Replace 'default-image-url' with your default image URL */}
                   <p>Drag and drop or browse to choose a file</p>
                 </div>
@@ -58,10 +54,8 @@ export const Report = (_props: Props) => {
                 </div>
               )}
             </label>
-
-          
           </div>
-          <div>
+          <div className={styles.EnterLocation}>
             <h2>Enter the location of the Parkings</h2>
             <div>
               <Locationsvg />
