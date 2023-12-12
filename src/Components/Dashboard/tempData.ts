@@ -10,6 +10,12 @@ export const NearbyParkings = [
             available: 10,
             total: 20,
         },
+		id: "1",
+		addon: [
+			{
+				name: "Car Wash",
+			}
+		]
     },
     {
         name: "Parking 2",
@@ -22,6 +28,8 @@ export const NearbyParkings = [
             available: 5,
             total: 50,
         },
+		id: "2",
+		addon: []
     },
     {
         name: "Parking 3",
@@ -34,5 +42,11 @@ export const NearbyParkings = [
             available: 8,
             total: 30,
         },
+		id: "3",
+		addon: [
+			{
+				name: "Car Cleaning",
+			}
+		]
     },
 ];

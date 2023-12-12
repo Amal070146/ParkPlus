@@ -15,4 +15,10 @@ interface NearbyParkings {
 		available: number;
 		total: number;
 	};
+	id: string;
+	addon: Addon[];
 }
+
+interface Addon {
+    name: string;
+};

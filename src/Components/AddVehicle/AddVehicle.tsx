@@ -4,9 +4,8 @@ import toast from "react-hot-toast";
 import { addVehicle, getVehicles, removeVehicle } from "./AddVehicleApi";
 import { HeaderNav } from "../Navbar/HeaderNav";
 import { Navbar } from "../Navbar/Navbar";
-type Props = {};
 
-const AddVehicle = (_props: Props) => {
+const AddVehicle = () => {
     const [data, setData] = useState<Vehicles[]>([]);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -34,7 +33,7 @@ const AddVehicle = (_props: Props) => {
 
     const handleAddVehicle = async (vehicle: AddVehicles) => {
         try {
-			setIsOpen(false)
+            setIsOpen(false);
             const response = await addVehicle(vehicle);
             if (response) {
                 toast.success("Vehicle added successfully");
@@ -43,8 +42,8 @@ const AddVehicle = (_props: Props) => {
             toast.error("Something went wrong, failed to add vehicle");
         }
     };
-    
-	const handleRemoveVehicle = async (id:string) => {
+
+    const handleRemoveVehicle = async (id: string) => {
         try {
             const response = await removeVehicle(id);
             if (response) {
@@ -56,84 +55,84 @@ const AddVehicle = (_props: Props) => {
     };
 
     return (
-      <div className={styles.vehicleWrapper}>
-        <HeaderNav title={"Add Vehicles"} />
-        <div className={styles.vehicleCardsWrapper}>
-          {data.map((vehicle) => (
-            <div className={styles.vehicleCards}>
-              <span
-                className={styles.delete}
-                onClick={() => handleRemoveVehicle(vehicle.id)}
-              >
-                x
-              </span>
-              <span>{vehicle.model}</span>
-              <span>{vehicle.vehicleNumber}</span>
-              <span>{vehicle.owner}</span>
+        <div className={styles.vehicleWrapper}>
+            <HeaderNav title={"Add Vehicles"} />
+            <div className={styles.vehicleCardsWrapper}>
+                {data.map((vehicle) => (
+                    <div className={styles.vehicleCards}>
+                        <span
+                            className={styles.delete}
+                            onClick={() => handleRemoveVehicle(vehicle.id)}
+                        >
+                            x
+                        </span>
+                        <span>{vehicle.model}</span>
+                        <span>{vehicle.vehicleNumber}</span>
+                        <span>{vehicle.owner}</span>
+                    </div>
+                ))}
+                <div
+                    className={styles.vehicleCards}
+                    onClick={() => {
+                        if (data.length >= 5) {
+                            toast.error("Cannot add more than 5 vehicles");
+                        } else {
+                            setIsOpen(true);
+                        }
+                    }}
+                >
+                    <p>+</p>
+                    <p>Add Vehicle</p>
+                </div>
             </div>
-          ))}
-          <div
-            className={styles.vehicleCards}
-            onClick={() => {
-              if (data.length >= 5) {
-                toast.error("Cannot add more than 5 vehicles");
-              } else {
-                setIsOpen(true);
-              }
-            }}
-          >
-            <p>+</p>
-            <p>Add Vehicle</p>
-          </div>
+            {isOpen && (
+                <div>
+                    <div className={styles.modalForm}>
+                        <h2>Add Vehicle</h2>
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Enter Vehicle Name"
+                                onChange={(e) =>
+                                    setNewVehicle({
+                                        ...newVehicle,
+                                        model: e.target.value,
+                                    })
+                                }
+                            />
+                            <input
+                                type="text"
+                                placeholder="Enter Registration Number"
+                                onChange={(e) =>
+                                    setNewVehicle({
+                                        ...newVehicle,
+                                        vehicleNumber: e.target.value,
+                                    })
+                                }
+                            />
+                            <input
+                                type="text"
+                                placeholder="Enter Owner Name"
+                                onChange={(e) =>
+                                    setNewVehicle({
+                                        ...newVehicle,
+                                        owner: e.target.value,
+                                    })
+                                }
+                            />
+                        </div>
+                        <button
+                            onClick={() => {
+                                handleAddVehicle(newVehicle);
+                            }}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            )}
+            <Navbar />
         </div>
-        {isOpen && (
-          <div>
-            <div className={styles.modalForm}>
-              <h2>Add Vehicle</h2>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Enter Vehicle Name"
-                  onChange={(e) =>
-                    setNewVehicle({
-                      ...newVehicle,
-                      model: e.target.value,
-                    })
-                  }
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Registration Number"
-                  onChange={(e) =>
-                    setNewVehicle({
-                      ...newVehicle,
-                      vehicleNumber: e.target.value,
-                    })
-                  }
-                />
-                <input
-                  type="text"
-                  placeholder="Enter Owner Name"
-                  onChange={(e) =>
-                    setNewVehicle({
-                      ...newVehicle,
-                      owner: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <button
-                onClick={() => {
-                  handleAddVehicle(newVehicle);
-                }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        )}
-        <Navbar />
-      </div>
     );
 };
 

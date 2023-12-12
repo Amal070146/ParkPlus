@@ -3,6 +3,7 @@ import { privateGateway } from "../../services/api/PrivateGateway";
 import { Vehicles } from "./TempData";
 
 export const getVehicles = async () => {
+    return Vehicles;
     try {
         const response = await privateGateway.get(Routes.nearbyParking);
         console.log(response.data);
