@@ -2,7 +2,6 @@ import styles from "./register.module.css";
 import image from "./assets/image.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import { loginUser } from "./RegisterApis";
 
 export const Login = () => {

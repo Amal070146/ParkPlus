@@ -34,6 +34,10 @@ export const loginUser = async (data1: any) => {
                 "accessToken",
                 data.session?.access_token as string
             );
+			localStorage.setItem(
+				"userId",
+				data.user?.id as string
+			)
             return data;
         }
     } catch (error) {
