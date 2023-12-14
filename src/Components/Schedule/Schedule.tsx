@@ -9,6 +9,7 @@ import { Calendar } from "@react-spectrum/calendar";
 import toast from "react-hot-toast";
 import { getVehicles } from "../AddVehicle/AddVehicleApi";
 import { ParkingSchedule } from "./ScheduleApi";
+import { SearchLocations } from "./SearchLocations";
 
 export const Schedule = () => {
     const formatTime = (date: Date) => {
@@ -84,6 +85,8 @@ export const Schedule = () => {
             }
         }
     };
+
+	const [isLocation, setIsLocation] = useState(false);
 
     const handleStartTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newStartTime = e.target.value;
@@ -250,7 +253,7 @@ export const Schedule = () => {
                     <h2>4.Select Location</h2>
                     <div
                         className={styles.locationContainer}
-                        onClick={() => navigate("/searchloaction")}
+                        onClick={() => setIsLocation(true)}
                     >
                         <Searchsvg />
                         <input
@@ -268,6 +271,9 @@ export const Schedule = () => {
                             <RightArrowsvg />
                         </button>
                     </div>
+					{isLocation && (
+						<SearchLocations />
+					)}
                 </div>
                 {formData.addon.length > 0 && (
                     <div>
