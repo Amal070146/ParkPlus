@@ -28,11 +28,10 @@ export const Schedule = () => {
         startTime: formatTime(defaultStartTime),
         endTime: formatTime(defaultEndTime),
         timeError: "",
-        location:
-            JSON.parse(String(localStorage.getItem("parking"))).name || "",
+        location: "test",
         vehicle: "",
         vehicles: [],
-        addon: JSON.parse(String(localStorage.getItem("parking"))).addon || [],
+        addon: [],
     });
     const currentDate = new Date();
 

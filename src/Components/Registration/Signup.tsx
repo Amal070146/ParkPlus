@@ -8,7 +8,6 @@ import {
     // ReactPortal,
     useState,
 } from "react";
-import toast from "react-hot-toast";
 import { registerUser } from "./RegisterApis";
 // import { JSX } from "react/jsx-runtime";
 
@@ -64,40 +63,20 @@ export const Signup = () => {
         return isValid;
     };
 
-	const handleRegistration = async (formData: FormData) => {
-        toast.promise(registerUser(formData), {
-            loading: "Registering...",
-            success: (response: any) => {
-                console.log("User registered successfully:", response);
-                navigate("/login");
-                return <b>User registered successfully!</b>;
-            },
-            error: (error) => {
-                console.error("Failed to register:", error);
-
-                // Assuming error is in the format { username: [...], email: [...] }
-                const errors = error.response?.data || error;
-                let errorMessages: string[] = [];
-                Object.keys(errors).forEach((key) => {
-                    const messages = errors[key];
-                    messages.forEach((message: string) => {
-                        errorMessages.push(message);
-                    });
-                });
-
-                return <b>{errorMessages[0]}</b>;
-            },
-        });
+	const handleRegistration = async (formData: any) => {
+		await registerUser(formData).then(() => {
+			navigate("/login");
+		})
     };
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault(); 
         if (validateForm()) {
-			const formData = new FormData();
-			formData.append("username", data.username);
-			formData.append("email", data.email);
-			formData.append("password", data.password);
-			handleRegistration(formData);
+			// const formData = new FormData();
+			// formData.append("username", data.username);
+			// formData.append("email", data.email);
+			// formData.append("password", data.password);
+			handleRegistration(data);
         }
     };
 

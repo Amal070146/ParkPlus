@@ -33,35 +33,23 @@ export const Login = () => {
         return isValid;
     };
 
-    const handleLogin = async (formData: FormData) => {
-        toast.promise(loginUser(formData), {
-            loading: "Logging in...",
-            success: (response) => {
-                console.log("User logged in successfully:", response);
-                navigate("/");
-                return <b>User logged in successfully!</b>;
-            },
-            error: (error) => {
-                console.error(
-                    "Failed to login:",
-                    error.response?.data?.detail || "Error"
-                );
-                return <b>{error.response?.data?.detail || "Login failed."}</b>;
-            },
-        });
+    const handleLogin = async (formData: any) => {
+		loginUser(formData).then(() => {
+			navigate("/");
+		})
     };
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         if (validateForm()) {
-            const formData = new FormData();
-            formData.append("EmailOrUsername", data.usernameOrEmail);
-            formData.append("password", data.password);
+            // const formData = new FormData();
+            // formData.append("EmailOrUsername", data.usernameOrEmail);
+            // formData.append("password", data.password);
 			if (data.usernameOrEmail === "test" && data.password === "123") {
                 localStorage.setItem("accessToken", "123sdsa354sdf");
 				navigate("/");
             } else {
-                handleLogin(formData);
+                handleLogin(data);
             }
         }
     };
