@@ -23,7 +23,7 @@ const AddVehicle = () => {
 
     useEffect(() => {
         handleFetchDetails();
-    }, [data]);
+    }, []);
 
     const [newVehicle, setNewVehicle] = useState<AddVehicles>({
         model: "",
@@ -32,23 +32,26 @@ const AddVehicle = () => {
     });
 
     const handleAddVehicle = async (vehicle: AddVehicles) => {
-        try {
-            setIsOpen(false);
+        setIsOpen(false);
+        if (data.length >= 5) {
+            toast.error("Maximum number of vehicles reached");
+            return;
+        } else {
             const response = await addVehicle(vehicle);
+            console.log(response);
             if (response) {
                 toast.success("Vehicle added successfully");
+                handleFetchDetails();
             }
-        } catch (error) {
-            toast.error("Something went wrong, failed to add vehicle");
         }
     };
 
     const handleRemoveVehicle = async (id: string) => {
         try {
-            const response = await removeVehicle(id);
-            if (response) {
+            await removeVehicle(id).then(() => {
                 toast.success("Vehicle removed");
-            }
+				handleFetchDetails();
+            });
         } catch (error) {
             toast.error("Something went wrong, failed to remove vehicle");
         }
@@ -67,7 +70,7 @@ const AddVehicle = () => {
                             x
                         </span>
                         <span>{vehicle.model}</span>
-                        <span>{vehicle.vehicleNumber}</span>
+                        <span>{vehicle.vehicle_number}</span>
                         <span>{vehicle.owner}</span>
                     </div>
                 ))}
