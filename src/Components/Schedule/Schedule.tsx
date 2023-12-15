@@ -8,10 +8,13 @@ import { CalendarDate } from "@internationalized/date";
 import { Calendar } from "@react-spectrum/calendar";
 import toast from "react-hot-toast";
 import { getVehicles } from "../AddVehicle/AddVehicleApi";
-import { ParkingSchedule } from "./ScheduleApi";
+import { ParkingSchedule, getLocations } from "./ScheduleApi";
 import { getNearbyParking } from "../Dashboard/DashboardApis";
 
 export const Schedule = () => {
+	const [locationData, setLocationData] = useState<NearbyParkings[]>([]);
+    const [location, setLocation] = useState<NearbyParkings>();
+
     const formatTime = (date: Date) => {
         // Format the date to HH:mm without converting to UTC
         let hours = date.getHours().toString().padStart(2, "0");
@@ -28,7 +31,7 @@ export const Schedule = () => {
         startTime: formatTime(defaultStartTime),
         endTime: formatTime(defaultEndTime),
         timeError: "",
-        location: "test",
+        location: location?.name || "",
         vehicle: "",
         vehicles: [],
         addon: [],
@@ -195,8 +198,12 @@ export const Schedule = () => {
         }
     };
 
-    const [locationData, setLocationData] = useState<NearbyParkings[]>([]);
-    const [location, setLocation] = useState<NearbyParkings>();
+	const handleSearch = async (value: string) => {
+		const message = await getLocations(value);
+        if (message) {
+            setLocationData(message);
+        }
+	}
 
     return (
         <div className={styles.ScheduleWrapper}>
@@ -272,9 +279,8 @@ export const Schedule = () => {
                         <input
                             type="text"
                             placeholder="Search Your Parking locations"
-                            value={formData.location}
                             onChange={(e) => {
-								
+								handleSearch(e.target.value);
                             }}
                         />
                         <button>
