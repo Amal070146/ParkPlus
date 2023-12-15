@@ -172,18 +172,20 @@ export const Schedule = () => {
 
     const handleSubmitSchedule = (event: { preventDefault: () => void }) => {
         event.preventDefault();
+		setFormData((prevState) => ({
+            ...prevState,
+            location: location?.id || "",
+        }));
         if (validateForm(formData)) {
             const data = new FormData();
-            data.append("startTime", formData.startTime);
-            data.append("endTime", formData.endTime);
-            data.append("vehicle", formData.vehicle);
-            data.append(
-                "parking",
-                JSON.parse(localStorage.getItem("parking") as string).id
-            );
+            data.append("time_start", formData.startTime);
+            data.append("time_end", formData.endTime);
+            data.append("vehicle_id", formData.vehicle);
+            data.append("parking_id", location?.id as string);
             data.append("date", selectedDate.toString());
+			data.append("user_id", localStorage.getItem("userId") as string);
 
-            toast.promise(ParkingSchedule(data), {
+            toast.promise(ParkingSchedule(formData.startTime, formData.endTime, formData.vehicle, location?.id as string, selectedDate.toString()), {
                 loading: "Loading...",
                 success: (response) => {
                     console.log("Parking successfully scheduled:", response);
