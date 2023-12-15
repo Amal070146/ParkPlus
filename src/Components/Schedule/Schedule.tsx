@@ -9,6 +9,7 @@ import { Calendar } from "@react-spectrum/calendar";
 import toast from "react-hot-toast";
 import { getVehicles } from "../AddVehicle/AddVehicleApi";
 import { ParkingSchedule } from "./ScheduleApi";
+import { getNearbyParking } from "../Dashboard/DashboardApis";
 
 export const Schedule = () => {
     const formatTime = (date: Date) => {
@@ -84,8 +85,6 @@ export const Schedule = () => {
         }
     };
 
-	const [isLocation, setIsLocation] = useState(false);
-
     const handleStartTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newStartTime = e.target.value;
         setFormData((prevState) => ({
@@ -123,6 +122,16 @@ export const Schedule = () => {
                     ...prevState,
                     vehicles: response,
                 }));
+            }
+            const coords = JSON.parse(
+                localStorage.getItem("location") as string
+            );
+            const message = await getNearbyParking({
+                latitude: coords.latitude || null,
+                longitude: coords.longitude || null,
+            });
+            if (message) {
+                setLocationData(message);
             }
         } catch (error) {
             toast.error("Something went wrong, failed to load data");
@@ -165,14 +174,17 @@ export const Schedule = () => {
             data.append("startTime", formData.startTime);
             data.append("endTime", formData.endTime);
             data.append("vehicle", formData.vehicle);
-            data.append("parking", JSON.parse(localStorage.getItem("parking") as string).id);
+            data.append(
+                "parking",
+                JSON.parse(localStorage.getItem("parking") as string).id
+            );
             data.append("date", selectedDate.toString());
 
             toast.promise(ParkingSchedule(data), {
                 loading: "Loading...",
                 success: (response) => {
                     console.log("Parking successfully scheduled:", response);
-					navigate("/successpage");
+                    navigate("/successpage");
                     return <b>Parking successfully scheduled!</b>;
                 },
                 error: (error) => {
@@ -183,7 +195,8 @@ export const Schedule = () => {
         }
     };
 
-	const [locationData, setLocationData] = useState<NearbyParkings[]>([]);
+    const [locationData, setLocationData] = useState<NearbyParkings[]>([]);
+    const [location, setLocation] = useState<NearbyParkings>();
 
     return (
         <div className={styles.ScheduleWrapper}>
@@ -254,7 +267,6 @@ export const Schedule = () => {
                     <h2>4.Select Location</h2>
                     <div
                         className={styles.locationContainer}
-                        onClick={() => setIsLocation(true)}
                     >
                         <Searchsvg />
                         <input
@@ -262,57 +274,45 @@ export const Schedule = () => {
                             placeholder="Search Your Parking locations"
                             value={formData.location}
                             onChange={(e) => {
-                                setFormData((prevState) => ({
-                                    ...prevState,
-                                    location: e.target.value,
-                                }));
+								
                             }}
                         />
                         <button>
                             <RightArrowsvg />
                         </button>
                     </div>
-                    {isLocation && (
-                        <>
-                            <div className={styles.dataSetWrapper}>
-                                {locationData &&
-                                    locationData.map((parking) => (
-                                        <button
-                                            className={styles.DataSet}
-                                            onClick={() => {
-                                                localStorage.setItem(
-                                                    "parking",
-                                                    JSON.stringify(parking)
-                                                );
-                                            }}
-                                        >
-                                            <img
-                                                src={parking.image}
-                                                alt={parking.name}
-                                            />
-                                            <h4>{parking.name}</h4>
-                                            <p>{parking.rate / 2}Rs / 30 m</p>
-                                            {parking && (
-                                                <p>
-                                                    {parking.available}
-                                                    /{parking.total}{" "}
-                                                    slots
-                                                </p>
-                                            )}
-                                        </button>
-                                    ))}
-                            </div>
-                            <button onClick={() => navigate("/schedule")}>
-                                Done
-                            </button>
-                        </>
-                    )}
+                    <div className={styles.SearchLocationWrapper}>
+                        <div className={styles.dataSetWrapper}>
+                            {locationData &&
+                                locationData.map((parking) => (
+                                    <button
+                                        className={styles.DataSet}
+                                        onClick={() => {
+											setLocation(parking);
+                                        }}
+                                    >
+                                        <img
+                                            src={parking.image}
+                                            alt={parking.name}
+                                        />
+                                        <h4>{parking.name}</h4>
+                                        <p>{parking.rate / 2}Rs / 30 m</p>
+                                        {parking && (
+                                            <p>
+                                                {parking.available}/
+                                                {parking.total} slots
+                                            </p>
+                                        )}
+                                    </button>
+                                ))}
+                        </div>
+                    </div>
                 </div>
-                {formData.addon.length > 0 && (
+                {location && location.addon.length > 0 && (
                     <div>
                         <h2>5.Add-On</h2>
                         <div className={styles.AddonContainer}>
-                            {formData.addon.map(({ name }, index) => (
+                            {location.addon.map((addon, index) => (
                                 <div
                                     className={styles.addOnContainer}
                                     key={index}
@@ -322,7 +322,7 @@ export const Schedule = () => {
                                         id={`checkbox-${index}`}
                                     />
                                     <label htmlFor={`checkbox-${index}`}>
-                                        {name}
+                                        {addon}
                                     </label>
                                 </div>
                             ))}

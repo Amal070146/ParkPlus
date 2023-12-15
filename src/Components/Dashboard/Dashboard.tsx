@@ -28,7 +28,12 @@ export const Dashboard = () => {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 });
-                console.log(location);
+				localStorage.setItem(
+					"location", JSON.stringify({
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude
+					})
+				)
             },
             () => {
                 setLocation((prevState) => ({
