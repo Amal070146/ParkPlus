@@ -9,7 +9,6 @@ import { Calendar } from "@react-spectrum/calendar";
 import toast from "react-hot-toast";
 import { getVehicles } from "../AddVehicle/AddVehicleApi";
 import { ParkingSchedule } from "./ScheduleApi";
-import { SearchLocations } from "./SearchLocations";
 
 export const Schedule = () => {
     const formatTime = (date: Date) => {
@@ -183,6 +182,9 @@ export const Schedule = () => {
             });
         }
     };
+
+	const [locationData, setLocationData] = useState<NearbyParkings[]>([]);
+
     return (
         <div className={styles.ScheduleWrapper}>
             {" "}
@@ -202,7 +204,7 @@ export const Schedule = () => {
                                 }`}
                             >
                                 <p>{vehicle.model}</p>
-                                <p>{vehicle.vehicleNumber}</p>
+                                <p>{vehicle.vehicle_number}</p>
                                 <p>{vehicle.owner}</p>
                             </div>
                         ))}
@@ -270,9 +272,41 @@ export const Schedule = () => {
                             <RightArrowsvg />
                         </button>
                     </div>
-					{isLocation && (
-						<SearchLocations />
-					)}
+                    {isLocation && (
+                        <>
+                            <div className={styles.dataSetWrapper}>
+                                {locationData &&
+                                    locationData.map((parking) => (
+                                        <button
+                                            className={styles.DataSet}
+                                            onClick={() => {
+                                                localStorage.setItem(
+                                                    "parking",
+                                                    JSON.stringify(parking)
+                                                );
+                                            }}
+                                        >
+                                            <img
+                                                src={parking.image}
+                                                alt={parking.name}
+                                            />
+                                            <h4>{parking.name}</h4>
+                                            <p>{parking.rate / 2}Rs / 30 m</p>
+                                            {parking && (
+                                                <p>
+                                                    {parking.available}
+                                                    /{parking.total}{" "}
+                                                    slots
+                                                </p>
+                                            )}
+                                        </button>
+                                    ))}
+                            </div>
+                            <button onClick={() => navigate("/schedule")}>
+                                Done
+                            </button>
+                        </>
+                    )}
                 </div>
                 {formData.addon.length > 0 && (
                     <div>

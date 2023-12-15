@@ -5,20 +5,14 @@ interface LocationState {
 }
 
 interface NearbyParkings {
-	name: string;
-	latitude: number;
-	longitude: number;
-	booked: boolean;
-	image: string;
-	rate: number;
-	capacity: {
-		available: number;
-		total: number;
-	};
-	id: string;
-	addon: Addon[];
-}
-
-interface Addon {
     name: string;
-};
+    latitude: number;
+    longitude: number;
+    booked: boolean;
+    image: string;
+    rate: number;
+    available: number;
+    total: number;
+    id: string;
+    addon: string[];
+}

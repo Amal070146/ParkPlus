@@ -55,7 +55,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         handleFetchDetails();
-    }, [data]);
+    }, []);
 
     const [currentSlide, setCurrentSlide] = useState(0);
     const totalSlides = data.length; 
@@ -95,8 +95,8 @@ export const Dashboard = () => {
                                         <p>Pay : {item.rate}/hr </p>
                                         <p>
 											{" "}Available :
-                                            {item.capacity.available}/
-                                            {item.capacity.total}
+                                            {item.available}/
+                                            {item.total}
                                         </p>
                                     </div>
                                 </div>

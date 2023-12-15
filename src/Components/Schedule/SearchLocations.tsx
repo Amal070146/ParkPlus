@@ -24,13 +24,12 @@ export const SearchLocations = () => {
 
     useEffect(() => {
         handleFetchDetails();
-    }, [data]);
+    }, []);
 
     const navigate = useNavigate();
 
     return (
         <div className={styles.SearchLocationWrapper}>
-            <HeaderNav title="Select Locations" />
             <div className={styles.locationContainer}>
                 <Searchsvg />
                 <input
