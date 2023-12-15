@@ -1,16 +1,31 @@
 import toast from "react-hot-toast";
 import { supabase } from "../../App";
-import { Routes } from "../../services/api/Endpoints";
-import { privateGateway } from "../../services/api/PrivateGateway";
 
-export const ParkingSchedule = async (data: FormData) => {
-    try {
-        const response = await privateGateway.post(Routes.nearbyParking, data);
-        console.log(response.data);
-        return response.data;
-    } catch (error) {
-        console.error("API error:", error);
-        return "error"
+export const ParkingSchedule = async (
+    start: string,
+    end: string,
+    vehicle: string,
+    parking: string,
+    date: string
+) => {
+    const { data, error } = await supabase
+        .from("bookings")
+        .insert([
+            {
+                user_id: localStorage.getItem("userId"),
+                parking_id: parking,
+                vehicle_id: vehicle,
+                date: date,
+                time_start: start,
+                time_end: end,
+            },
+        ])
+        .select();
+    if (error) {
+        toast.error(error.message);
+        throw error;
+    } else {
+        return data;
     }
 };
 

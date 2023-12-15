@@ -64,9 +64,10 @@ export const Signup = () => {
     };
 
 	const handleRegistration = async (formData: any) => {
-		await registerUser(formData).then(() => {
-			navigate("/login");
-		})
+		const response = await registerUser(formData);
+        if (response) {
+            navigate("/");
+        }
     };
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {

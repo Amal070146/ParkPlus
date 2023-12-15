@@ -8,11 +8,21 @@ export const registerUser = async (data1: any) => {
         let { data, error } = await supabase.auth.signUp({
             email: data1.email,
             password: data1.password,
-        });
+		})
         if (error) {
             toast.error(error.message);
         } else {
+			handleDisplayName(data1.username, data.user?.id as string);
             toast.success("Registration successful");
+			localStorage.setItem(
+				"userId", data.user?.id as string
+			)
+			localStorage.setItem(
+				"user", JSON.stringify(data.session)
+			)
+			localStorage.setItem(
+				"accessToken", data.session?.access_token as string
+			)
             return data;
         }
     } catch (error: any) {
@@ -34,6 +44,7 @@ export const loginUser = async (data1: any) => {
                 "accessToken",
                 data.session?.access_token as string
             );
+			localStorage.setItem("user", JSON.stringify(data.session));
 			localStorage.setItem(
 				"userId",
 				data.user?.id as string
@@ -45,3 +56,20 @@ export const loginUser = async (data1: any) => {
         throw error;
     }
 };
+
+const handleDisplayName = async (username: string, userId: string) => {
+	const { data, error } = await supabase
+        .from("profiles")
+        .upsert({
+            user_id: userId,
+            name: username,
+        });
+    if (error) {
+        toast.error(error.message);
+        throw error;
+    } else {
+		console.log(data);
+    }
+}
+
+
