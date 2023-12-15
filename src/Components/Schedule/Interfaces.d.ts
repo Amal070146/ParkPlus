@@ -1,7 +1,7 @@
 interface Vehicle {
     id: string;
     model: string;
-    vehicleNumber: string;
+    vehicle_number: string;
     owner: string;
 };
 

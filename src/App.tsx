@@ -17,7 +17,6 @@ import { DeleteSuccess } from "./Components/Successpage/DeleteSuccess";
 import { QRScanner } from "./Components/QRScanner/QRScanner";
 import { Notifications } from "./Components/Notifications/Notifications";
 import PrivateRoutes from "./services/PrivateRoutes";
-import { SearchLocations } from "./Components/Schedule/SearchLocations";
 import { Toaster } from "react-hot-toast";
 import { lightTheme, Provider } from "@adobe/react-spectrum";
 import AddVehicle from "./Components/AddVehicle/AddVehicle";
@@ -94,10 +93,6 @@ function App() {
         {
             path: "/notification",
             element: <PrivateRoutes children={<Notifications />} />,
-        },
-        {
-            path: "/searchloaction",
-            element: <PrivateRoutes children={<SearchLocations />} />,
         },
         {
             path: "/vehicles",

@@ -28,7 +28,12 @@ export const Dashboard = () => {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 });
-                console.log(location);
+				localStorage.setItem(
+					"location", JSON.stringify({
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude
+					})
+				)
             },
             () => {
                 setLocation((prevState) => ({
@@ -55,7 +60,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         handleFetchDetails();
-    }, [data]);
+    }, []);
 
     const [currentSlide, setCurrentSlide] = useState(0);
     const totalSlides = data.length; 
@@ -95,8 +100,8 @@ export const Dashboard = () => {
                                         <p>Pay : {item.rate}/hr </p>
                                         <p>
 											{" "}Available :
-                                            {item.capacity.available}/
-                                            {item.capacity.total}
+                                            {item.available}/
+                                            {item.total}
                                         </p>
                                     </div>
                                 </div>

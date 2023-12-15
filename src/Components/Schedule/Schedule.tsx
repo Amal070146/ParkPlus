@@ -8,10 +8,13 @@ import { CalendarDate } from "@internationalized/date";
 import { Calendar } from "@react-spectrum/calendar";
 import toast from "react-hot-toast";
 import { getVehicles } from "../AddVehicle/AddVehicleApi";
-import { ParkingSchedule } from "./ScheduleApi";
-import { SearchLocations } from "./SearchLocations";
+import { ParkingSchedule, getLocations } from "./ScheduleApi";
+import { getNearbyParking } from "../Dashboard/DashboardApis";
 
 export const Schedule = () => {
+	const [locationData, setLocationData] = useState<NearbyParkings[]>([]);
+    const [location, setLocation] = useState<NearbyParkings>();
+
     const formatTime = (date: Date) => {
         // Format the date to HH:mm without converting to UTC
         let hours = date.getHours().toString().padStart(2, "0");
@@ -28,7 +31,7 @@ export const Schedule = () => {
         startTime: formatTime(defaultStartTime),
         endTime: formatTime(defaultEndTime),
         timeError: "",
-        location: "test",
+        location: location?.name || "",
         vehicle: "",
         vehicles: [],
         addon: [],
@@ -85,8 +88,6 @@ export const Schedule = () => {
         }
     };
 
-	const [isLocation, setIsLocation] = useState(false);
-
     const handleStartTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newStartTime = e.target.value;
         setFormData((prevState) => ({
@@ -124,6 +125,16 @@ export const Schedule = () => {
                     ...prevState,
                     vehicles: response,
                 }));
+            }
+            const coords = JSON.parse(
+                localStorage.getItem("location") as string
+            );
+            const message = await getNearbyParking({
+                latitude: coords.latitude || null,
+                longitude: coords.longitude || null,
+            });
+            if (message) {
+                setLocationData(message);
             }
         } catch (error) {
             toast.error("Something went wrong, failed to load data");
@@ -166,14 +177,17 @@ export const Schedule = () => {
             data.append("startTime", formData.startTime);
             data.append("endTime", formData.endTime);
             data.append("vehicle", formData.vehicle);
-            data.append("parking", JSON.parse(localStorage.getItem("parking") as string).id);
+            data.append(
+                "parking",
+                JSON.parse(localStorage.getItem("parking") as string).id
+            );
             data.append("date", selectedDate.toString());
 
             toast.promise(ParkingSchedule(data), {
                 loading: "Loading...",
                 success: (response) => {
                     console.log("Parking successfully scheduled:", response);
-					navigate("/successpage");
+                    navigate("/successpage");
                     return <b>Parking successfully scheduled!</b>;
                 },
                 error: (error) => {
@@ -183,6 +197,14 @@ export const Schedule = () => {
             });
         }
     };
+
+	const handleSearch = async (value: string) => {
+		const message = await getLocations(value);
+        if (message) {
+            setLocationData(message);
+        }
+	}
+
     return (
         <div className={styles.ScheduleWrapper}>
             {" "}
@@ -202,7 +224,7 @@ export const Schedule = () => {
                                 }`}
                             >
                                 <p>{vehicle.model}</p>
-                                <p>{vehicle.vehicleNumber}</p>
+                                <p>{vehicle.vehicle_number}</p>
                                 <p>{vehicle.owner}</p>
                             </div>
                         ))}
@@ -252,33 +274,51 @@ export const Schedule = () => {
                     <h2>4.Select Location</h2>
                     <div
                         className={styles.locationContainer}
-                        onClick={() => setIsLocation(true)}
                     >
                         <Searchsvg />
                         <input
                             type="text"
                             placeholder="Search Your Parking locations"
-                            value={formData.location}
                             onChange={(e) => {
-                                setFormData((prevState) => ({
-                                    ...prevState,
-                                    location: e.target.value,
-                                }));
+								handleSearch(e.target.value);
                             }}
                         />
                         <button>
                             <RightArrowsvg />
                         </button>
                     </div>
-					{isLocation && (
-						<SearchLocations />
-					)}
+                    <div className={styles.SearchLocationWrapper}>
+                        <div className={styles.dataSetWrapper}>
+                            {locationData &&
+                                locationData.map((parking) => (
+                                    <button
+                                        className={styles.DataSet}
+                                        onClick={() => {
+											setLocation(parking);
+                                        }}
+                                    >
+                                        <img
+                                            src={parking.image}
+                                            alt={parking.name}
+                                        />
+                                        <h4>{parking.name}</h4>
+                                        <p>{parking.rate / 2}Rs / 30 m</p>
+                                        {parking && (
+                                            <p>
+                                                {parking.available}/
+                                                {parking.total} slots
+                                            </p>
+                                        )}
+                                    </button>
+                                ))}
+                        </div>
+                    </div>
                 </div>
-                {formData.addon.length > 0 && (
+                {location && location.addon.length > 0 && (
                     <div>
                         <h2>5.Add-On</h2>
                         <div className={styles.AddonContainer}>
-                            {formData.addon.map(({ name }, index) => (
+                            {location.addon.map((addon, index) => (
                                 <div
                                     className={styles.addOnContainer}
                                     key={index}
@@ -288,7 +328,7 @@ export const Schedule = () => {
                                         id={`checkbox-${index}`}
                                     />
                                     <label htmlFor={`checkbox-${index}`}>
-                                        {name}
+                                        {addon}
                                     </label>
                                 </div>
                             ))}
